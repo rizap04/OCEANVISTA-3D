@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>OCEANVISTA | 3D Ocean Visualization</title>
+
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #061826;
+            color: white;
+        }
+
+        header {
+            padding: 25px 40px;
+            background: #08283d;
+            border-bottom: 1px solid #164d6b;
+        }
+
+        header h1 {
+            font-size: 32px;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            margin-top: 6px;
+            color: #9ccfe8;
+        }
+
+        .container {
+            padding: 30px;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .controls {
+            background: #0b3048;
+            padding: 22px;
+            border-radius: 12px;
+            display: flex;
+            gap: 20px;
+            align-items: end;
+            flex-wrap: wrap;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        label {
+            color: #a9d8ec;
+            font-size: 14px;
+        }
+
+        input,
+        select {
+            padding: 11px;
+            border-radius: 7px;
+            border: 1px solid #2d6988;
+            background: #061826;
+            color: white;
+            width: 180px;
+            font-size: 15px;
+        }
+
+        button {
+            padding: 11px 25px;
+            border: none;
+            border-radius: 7px;
+            background: #168ac0;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1aa2df;
+        }
+
+        .status {
+            margin-top: 15px;
+            color: #9ccfe8;
+        }
+
+        .dashboard {
+            margin-top: 25px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .card {
+            background: #0b3048;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .card h2 {
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        #ocean3d {
+            width: 100%;
+            height: 600px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .info-box {
+            background: #061f31;
+            padding: 18px;
+            border-radius: 9px;
+        }
+
+        .info-box span {
+            display: block;
+            color: #8bbdd3;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .info-box strong {
+            font-size: 22px;
+        }
+
+        .depth-table {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .depth-table th,
+        .depth-table td {
+            padding: 10px;
+            border-bottom: 1px solid #194b64;
+            text-align: left;
+        }
+
+        .depth-table th {
+            color: #9ccfe8;
+        }
+
+        @media (max-width: 900px) {
+
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <header>
+
+        <h1>🌊 OCEANVISTA</h1>
+
+        <p>
+            Interactive 3D Ocean Model Visualization Platform
+        </p>
+
+    </header>
+
+
+    <div class="container">
+
+
+        <!-- CONTROL PANEL -->
+
+        <div class="controls">
+
+
+            <div class="input-group">
+
+                <label>
+                    Latitude
+                </label>
+
+                <input
+                    id="latitude"
+                    type="number"
+                    step="0.01"
+                    value="18.52"
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    Longitude
+                </label>
+
+                <input
+                    id="longitude"
+                    type="number"
+                    step="0.01"
+                    value="73.85"
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    Ocean Variable
+                </label>
+
+                <select id="variable">
+
+                    <option value="temperature">
+                        Temperature
+                    </option>
+
+                    <option value="salinity">
+                        Salinity
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button onclick="loadOceanData()">
+
+                Explore Ocean
+
+            </button>
+
+
+        </div>
+
+
+        <div
+            class="status"
+            id="status"
+        >
+
+            Ready to explore ocean data.
+
+        </div>
+
+
+        <!-- DASHBOARD -->
+
+        <div class="dashboard">
+
+
+            <!-- 3D MODEL -->
+
+            <div class="card">
+
+                <h2>
+                    3D Ocean Model
+                </h2>
+
+                <div id="ocean3d"></div>
+
+            </div>
+
+
+            <!-- LOCATION INFORMATION -->
+
+            <div class="card">
+
+
+                <h2>
+                    Selected Location
+                </h2>
+
+
+                <div class="info-grid">
+
+
+                    <div class="info-box">
+
+                        <span>
+                            Latitude
+                        </span>
+
+                        <strong id="selectedLat">
+                            --
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <span>
+                            Longitude
+                        </span>
+
+                        <strong id="selectedLon">
+                            --
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+                <h2 style="margin-top:25px;">
+
+                    Ocean Profile
+
+                </h2>
+
+
+                <table class="depth-table">
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Depth (m)
+                            </th>
+
+                            <th>
+                                Temperature (°C)
+                            </th>
+
+                            <th>
+                                Salinity
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="oceanTable">
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <script>
+
+
+        async function loadOceanData() {
+
+
+            const latitude =
+                document.getElementById(
+                    "latitude"
+                ).value;
+
+
+            const longitude =
+                document.getElementById(
+                    "longitude"
+                ).value;
+
+
+            const status =
+                document.getElementById(
+                    "status"
+                );
+
+
+            status.textContent =
+                "Loading ocean data...";
+
+
+            try {
+
+
+                /*
+                 * Get complete ocean grid.
+                 */
+
+                const gridResponse =
+                    await fetch(
+                        "/ocean-grid"
+                    );
+
+
+                if (!gridResponse.ok) {
+
+                    throw new Error(
+                        "Ocean grid API failed"
+                    );
+
+                }
+
+
+                const gridData =
+                    await gridResponse.json();
+
+
+                /*
+                 * Get selected location.
+                 */
+
+                const locationResponse =
+                    await fetch(
+                        `/ocean-data?latitude=${latitude}&longitude=${longitude}`
+                    );
+
+
+                if (!locationResponse.ok) {
+
+                    throw new Error(
+                        "Ocean location API failed"
+                    );
+
+                }
+
+
+                const locationData =
+                    await locationResponse.json();
+
+
+                /*
+                 * Display selected location.
+                 */
+
+                document.getElementById(
+                    "selectedLat"
+                ).textContent =
+                    locationData.latitude;
+
+
+                document.getElementById(
+                    "selectedLon"
+                ).textContent =
+                    locationData.longitude;
+
+
+                /*
+                 * Create 3D visualization.
+                 */
+
+                create3DVisualization(
+                    gridData
+                );
+
+
+                /*
+                 * Create profile table.
+                 */
+
+                createOceanTable(
+                    locationData
+                );
+
+
+                status.textContent =
+                    "Ocean data loaded successfully.";
+
+
+            }
+
+
+            catch (error) {
+
+
+                console.error(error);
+
+
+                status.textContent =
+                    "Unable to load ocean data.";
+
+            }
+
+        }
+
+
+
+        function create3DVisualization(data) {
+
+
+            const latitudes =
+                data.latitude;
+
+
+            const longitudes =
+                data.longitude;
+
+
+            const depths =
+                data.depth;
+
+
+            /*
+             * Read selected variable.
+             */
+
+            const variable =
+                document.getElementById(
+                    "variable"
+                ).value;
+
+
+            const values =
+                data[variable];
+
+
+            const x = [];
+
+            const y = [];
+
+            const z = [];
+
+            const variableValues = [];
+
+
+            /*
+             * Convert the 3D dataset
+             * into Plotly points.
+             */
+
+            for (
+                let i = 0;
+                i < latitudes.length;
+                i++
+            ) {
+
+
+                for (
+                    let j = 0;
+                    j < longitudes.length;
+                    j++
+                ) {
+
+
+                    for (
+                        let k = 0;
+                        k < depths.length;
+                        k++
+                    ) {
+
+
+                        x.push(
+                            longitudes[j]
+                        );
+
+
+                        y.push(
+                            latitudes[i]
+                        );
+
+
+                        z.push(
+                            -depths[k]
+                        );
+
+
+                        variableValues.push(
+                            values[i][j][k]
+                        );
+
+
+                    }
+
+                }
+
+            }
+
+
+            /*
+             * Choose colorbar title.
+             */
+
+            const colorbarTitle =
+                variable === "temperature"
+                    ? "Temperature °C"
+                    : "Salinity";
+
+
+            /*
+             * Create 3D Plotly trace.
+             */
+
+            const trace = {
+
+
+                x: x,
+
+                y: y,
+
+                z: z,
+
+
+                mode: "markers",
+
+
+                type: "scatter3d",
+
+
+                marker: {
+
+                    size: 8,
+
+                    color: variableValues,
+
+                    colorscale: "Turbo",
+
+                    colorbar: {
+
+                        title:
+                            colorbarTitle
+
+                    }
+
+                },
+
+
+                text:
+
+                    variableValues.map(
+                        (value, index) =>
+
+                            `${colorbarTitle}: ${value}<br>
+                             Longitude: ${x[index]}<br>
+                             Latitude: ${y[index]}<br>
+                             Depth: ${-z[index]} m`
+
+                    ),
+
+
+                hovertemplate:
+                    "%{text}<extra></extra>"
+
+            };
+
+
+            /*
+             * Plot layout.
+             */
+
+            const layout = {
+
+
+                paper_bgcolor:
+                    "#0b3048",
+
+
+                plot_bgcolor:
+                    "#0b3048",
+
+
+                scene: {
+
+
+                    xaxis: {
+
+                        title:
+                            "Longitude"
+
+                    },
+
+
+                    yaxis: {
+
+                        title:
+                            "Latitude"
+
+                    },
+
+
+                    zaxis: {
+
+                        title:
+                            "Depth (m)"
+
+                    },
+
+
+                    bgcolor:
+                        "#0b3048"
+
+                },
+
+
+                margin: {
+
+                    l: 0,
+
+                    r: 0,
+
+                    b: 0,
+
+                    t: 0
+
+                }
+
+            };
+
+
+            Plotly.newPlot(
+
+                "ocean3d",
+
+                [trace],
+
+                layout,
+
+                {
+                    responsive: true
+                }
+
+            );
+
+        }
+
+
+
+        function createOceanTable(data) {
+
+
+            const table =
+                document.getElementById(
+                    "oceanTable"
+                );
+
+
+            table.innerHTML = "";
+
+
+            for (
+                let i = 0;
+                i < data.depth.length;
+                i++
+            ) {
+
+
+                const row =
+                    document.createElement(
+                        "tr"
+                    );
+
+
+                row.innerHTML = `
+
+                    <td>
+                        ${data.depth[i]}
+                    </td>
+
+                    <td>
+                        ${data.temperature[i]}
+                    </td>
+
+                    <td>
+                        ${data.salinity[i]}
+                    </td>
+
+                `;
+
+
+                table.appendChild(row);
+
+            }
+
+        }
+
+
+
+        /*
+         * Load dashboard automatically.
+         */
+
+        loadOceanData();
+
+
+    </script>
+
+
+</body>
+
+</html>
