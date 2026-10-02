@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Data & Analysis | OCEANVISTA</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <a href="index.html" class="logo">
+        OCEANVISTA
+    </a>
+
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="explorer.html">Explorer</a>
+        <a href="data.html" class="active">Data &amp; Analysis</a>
+        <a href="about.html">About</a>
+    </div>
+
+</nav>
+
+
+<!-- ================= PAGE HEADER ================= -->
+
+<section class="page-hero">
+
+    <div class="eyebrow">
+        OCEAN DATA
+    </div>
+
+    <h1>
+        Understand the ocean<br>
+        through <span>data.</span>
+    </h1>
+
+    <p>
+        Explore the variables, measurements and scientific datasets
+        behind the OCEANVISTA visualization platform.
+    </p>
+
+</section>
+
+
+<!-- ================= DATA OVERVIEW ================= -->
+
+<section class="data-section">
+
+    <div class="section-heading">
+
+        <div>
+            <span class="section-label">01 / DATA OVERVIEW</span>
+
+            <h2>
+                What are we<br>
+                measuring?
+            </h2>
+        </div>
+
+        <p>
+            Ocean conditions are represented through multiple
+            physical and environmental variables. OCEANVISTA
+            brings these measurements together to make complex
+            ocean data easier to explore.
+        </p>
+
+    </div>
+
+
+    <div class="data-grid">
+
+        <div class="data-card">
+
+            <div class="data-icon">°C</div>
+
+            <h3>Temperature</h3>
+
+            <p>
+                Observe how ocean temperature changes
+                with location and depth.
+            </p>
+
+            <span class="card-tag">THERMAL DATA</span>
+
+        </div>
+
+
+        <div class="data-card">
+
+            <div class="data-icon">m</div>
+
+            <h3>Depth</h3>
+
+            <p>
+                Examine measurements across different
+                levels beneath the ocean surface.
+            </p>
+
+            <span class="card-tag">VERTICAL PROFILE</span>
+
+        </div>
+
+
+        <div class="data-card">
+
+            <div class="data-icon">↝</div>
+
+            <h3>Ocean Currents</h3>
+
+            <p>
+                Visualize the movement of ocean water
+                and understand its changing patterns.
+            </p>
+
+            <span class="card-tag">DYNAMICS</span>
+
+        </div>
+
+
+        <div class="data-card">
+
+            <div class="data-icon">≈</div>
+
+            <h3>Salinity</h3>
+
+            <p>
+                Study variations in the concentration
+                of dissolved salts within seawater.
+            </p>
+
+            <span class="card-tag">CHEMICAL DATA</span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ANALYSIS AREA ================= -->
+
+<section class="analysis-section">
+
+    <div class="analysis-header">
+
+        <div>
+            <span class="section-label">02 / ANALYSIS</span>
+
+            <h2>
+                From numbers<br>
+                to patterns.
+            </h2>
+        </div>
+
+        <p>
+            Data visualization helps reveal relationships
+            that are difficult to understand from raw values alone.
+        </p>
+
+    </div>
+
+
+    <div class="analysis-panel">
+
+        <div class="panel-top">
+
+            <div>
+
+                <span class="panel-label">
+                    TEMPERATURE PROFILE
+                </span>
+
+                <h3>
+                    Temperature variation with depth
+                </h3>
+
+            </div>
+
+            <div class="panel-status">
+                <span></span>
+                OCEAN DATA
+            </div>
+
+        </div>
+
+
+        <div id="temperatureChart"></div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= DATA PIPELINE ================= -->
+
+<section class="pipeline-section">
+
+    <div class="section-heading">
+
+        <div>
+
+            <span class="section-label">
+                03 / DATA PIPELINE
+            </span>
+
+            <h2>
+                From ocean<br>
+                to visualization.
+            </h2>
+
+        </div>
+
+        <p>
+            OCEANVISTA is designed to transform scientific
+            ocean datasets into an interactive visual experience.
+        </p>
+
+    </div>
+
+
+    <div class="pipeline">
+
+        <div class="pipeline-step">
+
+            <span class="step-number">01</span>
+
+            <div>
+
+                <h3>
+                    Data Sources
+                </h3>
+
+                <p>
+                    Numerical ocean model outputs and
+                    in-situ observations provide the foundation.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="pipeline-line"></div>
+
+
+        <div class="pipeline-step">
+
+            <span class="step-number">02</span>
+
+            <div>
+
+                <h3>
+                    Processing
+                </h3>
+
+                <p>
+                    Python-based processing prepares the
+                    scientific datasets for visualization.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="pipeline-line"></div>
+
+
+        <div class="pipeline-step">
+
+            <span class="step-number">03</span>
+
+            <div>
+
+                <h3>
+                    Visualization
+                </h3>
+
+                <p>
+                    Processed information is transformed into
+                    interactive charts and 3D ocean views.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= DATA SOURCE ================= -->
+
+<section class="source-section">
+
+    <div class="source-card">
+
+        <div class="source-content">
+
+            <span class="section-label">
+                04 / DATA SOURCE
+            </span>
+
+            <h2>
+                Built around<br>
+                scientific ocean data.
+            </h2>
+
+            <p>
+                OCEANVISTA is designed to work with numerical
+                ocean model outputs and observational datasets,
+                providing a unified environment for exploring
+                ocean conditions.
+            </p>
+
+        </div>
+
+
+        <div class="source-badge">
+
+            <div class="source-orbit"></div>
+
+            <strong>
+                OCEAN<br>
+                DATA
+            </strong>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<section class="final-cta">
+
+    <span class="section-label">
+        READY TO EXPLORE?
+    </span>
+
+    <h2>
+        See the ocean<br>
+        in three dimensions.
+    </h2>
+
+    <a href="explorer.html" class="primary-btn">
+        Open Ocean Explorer →
+    </a>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div>
+        <strong>OCEANVISTA</strong>
+        <span>
+            Interactive Ocean Visualization Platform
+        </span>
+    </div>
+
+    <div>
+        Ocean data powered by Copernicus Marine Service
+    </div>
+
+</footer>
+
+
+<!-- ================= CHART ================= -->
+
+<script>
+
+const depth = [
+    0,
+    10,
+    25,
+    50,
+    100,
+    200,
+    500,
+    1000
+];
+
+const temperature = [
+    25,
+    24.6,
+    24.1,
+    23.4,
+    21.8,
+    18.5,
+    12.7,
+    8.9
+];
+
+const trace = {
+
+    x: temperature,
+
+    y: depth,
+
+    type: "scatter",
+
+    mode: "lines+markers",
+
+    line: {
+        width: 3
+    },
+
+    marker: {
+        size: 8
+    }
+
+};
+
+const layout = {
+
+    paper_bgcolor: "rgba(0,0,0,0)",
+
+    plot_bgcolor: "rgba(0,0,0,0)",
+
+    margin: {
+        l: 65,
+        r: 25,
+        t: 20,
+        b: 55
+    },
+
+    font: {
+        color: "#9fb5c5"
+    },
+
+    xaxis: {
+
+        title: "Temperature (°C)",
+
+        gridcolor: "rgba(255,255,255,0.08)",
+
+        zeroline: false
+
+    },
+
+    yaxis: {
+
+        title: "Depth (m)",
+
+        autorange: "reversed",
+
+        gridcolor: "rgba(255,255,255,0.08)",
+
+        zeroline: false
+
+    },
+
+    showlegend: false
+
+};
+
+Plotly.newPlot(
+
+    "temperatureChart",
+
+    [trace],
+
+    layout,
+
+    {
+        responsive: true,
+        displayModeBar: false
+    }
+
+);
+
+</script>
+
+</body>
+</html>

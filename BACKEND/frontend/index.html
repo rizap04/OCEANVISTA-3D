@@ -2,170 +2,618 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>OCEANVISTA | 3D Ocean Visualization</title>
+    <title>OCEANVISTA | Interactive 3D Ocean Visualization</title>
 
-    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <!-- THREE.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <style>
 
+        /* =========================================================
+           GLOBAL
+        ========================================================= */
+
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background: #061826;
-            color: white;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #020b13;
+            color: #eaf8ff;
+            overflow-x: hidden;
         }
 
-        header {
-            padding: 25px 40px;
-            background: #08283d;
-            border-bottom: 1px solid #164d6b;
+        a {
+            text-decoration: none;
         }
 
-        header h1 {
-            font-size: 32px;
-            letter-spacing: 2px;
-        }
 
-        header p {
-            margin-top: 6px;
-            color: #9ccfe8;
-        }
+        /* =========================================================
+           NAVBAR
+        ========================================================= */
 
-        .container {
-            padding: 30px;
-            max-width: 1400px;
-            margin: auto;
-        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 72px;
 
-        .controls {
-            background: #0b3048;
-            padding: 22px;
-            border-radius: 12px;
             display: flex;
-            gap: 20px;
-            align-items: end;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 50px;
+
+            background: rgba(2, 11, 19, 0.75);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(90, 210, 240, 0.12);
+
+            z-index: 1000;
+        }
+
+        .logo {
+            color: #5de1ff;
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+
+            text-shadow:
+                0 0 18px rgba(70, 220, 255, 0.35);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: #8ca8b7;
+            font-size: 0.9rem;
+            transition: 0.25s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #63e4ff;
+        }
+
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .hero {
+            min-height: 100vh;
+
+            position: relative;
+            overflow: hidden;
+
+            display: grid;
+            grid-template-columns: 48% 52%;
+            align-items: center;
+
+            padding: 100px 6% 50px;
+        }
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+            width: 650px;
+            height: 650px;
+
+            left: -250px;
+            top: 100px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(0, 130, 180, 0.13),
+                    transparent 68%
+                );
+
+            filter: blur(25px);
+
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+
+            max-width: 650px;
+        }
+
+        .eyebrow {
+            color: #5de1ff;
+
+            font-size: 0.72rem;
+            font-weight: 700;
+
+            letter-spacing: 4px;
+
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3.2rem, 6vw, 6.5rem);
+
+            line-height: 0.95;
+
+            letter-spacing: -4px;
+
+            margin-bottom: 30px;
+        }
+
+        .hero h1 span {
+            color: #55d9f5;
+        }
+
+        .hero-text {
+            max-width: 580px;
+
+            color: #91abb8;
+
+            font-size: 1.05rem;
+            line-height: 1.8;
+
+            margin-bottom: 38px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
             flex-wrap: wrap;
         }
 
-        .input-group {
+        .primary-btn {
+            padding: 14px 24px;
+
+            background: #55d9f5;
+            color: #021019;
+
+            border-radius: 7px;
+
+            font-weight: 700;
+
+            transition: 0.25s ease;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 30px rgba(70, 215, 245, 0.2);
+        }
+
+        .secondary-btn {
+            padding: 14px 24px;
+
+            border: 1px solid rgba(90, 210, 240, 0.3);
+
+            color: #b5d2dc;
+
+            border-radius: 7px;
+
+            transition: 0.25s ease;
+        }
+
+        .secondary-btn:hover {
+            border-color: #55d9f5;
+            color: #55d9f5;
+        }
+
+
+        /* =========================================================
+           GLOBE
+        ========================================================= */
+
+        .globe-area {
+            position: relative;
+
+            width: 100%;
+            height: 650px;
+
             display: flex;
-            flex-direction: column;
-            gap: 7px;
+            align-items: center;
+            justify-content: center;
         }
 
-        label {
-            color: #a9d8ec;
-            font-size: 14px;
+        #globe {
+            width: 100%;
+            height: 100%;
         }
 
-        input,
-        select {
-            padding: 11px;
-            border-radius: 7px;
-            border: 1px solid #2d6988;
-            background: #061826;
-            color: white;
-            width: 180px;
-            font-size: 15px;
+        .globe-label {
+            position: absolute;
+
+            bottom: 55px;
+            right: 50px;
+
+            padding: 10px 16px;
+
+            border: 1px solid rgba(80, 210, 240, 0.18);
+
+            background: rgba(3, 18, 28, 0.65);
+
+            backdrop-filter: blur(10px);
+
+            color: #7fabb9;
+
+            font-size: 0.72rem;
+
+            letter-spacing: 1.5px;
+
+            border-radius: 5px;
         }
 
-        button {
-            padding: 11px 25px;
-            border: none;
-            border-radius: 7px;
-            background: #168ac0;
-            color: white;
-            font-size: 15px;
-            cursor: pointer;
-        }
 
-        button:hover {
-            background: #1aa2df;
-        }
+        /* =========================================================
+           DATA STRIP
+        ========================================================= */
 
-        .status {
-            margin-top: 15px;
-            color: #9ccfe8;
-        }
+        .data-strip {
+            position: relative;
+            z-index: 5;
 
-        .dashboard {
-            margin-top: 25px;
             display: grid;
-            grid-template-columns: 2fr 1fr;
+            grid-template-columns: repeat(4, 1fr);
+
+            margin: -40px 6% 0;
+
+            border-top: 1px solid rgba(90, 210, 240, 0.12);
+            border-bottom: 1px solid rgba(90, 210, 240, 0.12);
+        }
+
+        .data-item {
+            padding: 30px 25px;
+
+            border-right: 1px solid rgba(90, 210, 240, 0.1);
+        }
+
+        .data-item:last-child {
+            border-right: none;
+        }
+
+        .data-item small {
+            display: block;
+
+            color: #587582;
+
+            font-size: 0.68rem;
+
+            letter-spacing: 1.5px;
+
+            margin-bottom: 8px;
+        }
+
+        .data-item strong {
+            color: #b8d7e2;
+
+            font-size: 0.95rem;
+        }
+
+
+        /* =========================================================
+           INTRO SECTION
+        ========================================================= */
+
+        .section {
+            max-width: 1250px;
+
+            margin: auto;
+
+            padding: 130px 40px;
+        }
+
+        .section-label {
+            color: #55d9f5;
+
+            font-size: 0.7rem;
+            font-weight: 700;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 18px;
+        }
+
+        .section h2 {
+            font-size: clamp(2.2rem, 4vw, 4rem);
+
+            letter-spacing: -2px;
+
+            margin-bottom: 22px;
+        }
+
+        .section-intro {
+            max-width: 700px;
+
+            color: #829ca9;
+
+            line-height: 1.8;
+
+            margin-bottom: 55px;
+        }
+
+
+        /* =========================================================
+           FEATURE CARDS
+        ========================================================= */
+
+        .cards {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
             gap: 20px;
         }
 
         .card {
-            background: #0b3048;
-            border-radius: 12px;
-            padding: 20px;
+            padding: 35px;
+
+            min-height: 240px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(13, 38, 51, 0.7),
+                    rgba(4, 17, 27, 0.8)
+                );
+
+            border:
+                1px solid rgba(90, 210, 240, 0.12);
+
+            border-radius: 10px;
+
+            transition: 0.3s ease;
         }
 
-        .card h2 {
+        .card:hover {
+            transform: translateY(-6px);
+
+            border-color:
+                rgba(90, 210, 240, 0.3);
+        }
+
+        .card-number {
+            color: #55d9f5;
+
+            font-size: 0.7rem;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 35px;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+
             margin-bottom: 15px;
-            font-size: 20px;
         }
 
-        #ocean3d {
-            width: 100%;
-            height: 600px;
+        .card p {
+            color: #7894a1;
+
+            line-height: 1.7;
+
+            font-size: 0.92rem;
         }
 
-        .info-grid {
+
+        /* =========================================================
+           WORKFLOW
+        ========================================================= */
+
+        .workflow {
+            border-top:
+                1px solid rgba(90, 210, 240, 0.1);
+
+            border-bottom:
+                1px solid rgba(90, 210, 240, 0.1);
+        }
+
+        .steps {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 45px;
         }
 
-        .info-box {
-            background: #061f31;
-            padding: 18px;
-            border-radius: 9px;
+        .step-number {
+            color: #55d9f5;
+
+            font-size: 0.7rem;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 18px;
         }
 
-        .info-box span {
-            display: block;
-            color: #8bbdd3;
-            font-size: 13px;
-            margin-bottom: 8px;
+        .step h3 {
+            margin-bottom: 12px;
         }
 
-        .info-box strong {
-            font-size: 22px;
+        .step p {
+            color: #7894a1;
+
+            line-height: 1.7;
         }
 
-        .depth-table {
-            margin-top: 20px;
-            width: 100%;
-            border-collapse: collapse;
+
+        /* =========================================================
+           CTA
+        ========================================================= */
+
+        .cta {
+            text-align: center;
+
+            padding: 130px 30px;
         }
 
-        .depth-table th,
-        .depth-table td {
-            padding: 10px;
-            border-bottom: 1px solid #194b64;
-            text-align: left;
+        .cta h2 {
+            font-size: clamp(2.3rem, 5vw, 4.5rem);
+
+            letter-spacing: -2px;
+
+            margin-bottom: 22px;
         }
 
-        .depth-table th {
-            color: #9ccfe8;
+        .cta p {
+            color: #819ba7;
+
+            max-width: 600px;
+
+            margin: 0 auto 35px;
+
+            line-height: 1.8;
         }
 
-        @media (max-width: 900px) {
 
-            .dashboard {
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            padding: 35px 6%;
+
+            border-top:
+                1px solid rgba(90, 210, 240, 0.1);
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+        .footer-brand {
+            color: #5de1ff;
+
+            font-weight: 800;
+
+            letter-spacing: 2px;
+        }
+
+        .footer-text {
+            color: #587582;
+
+            font-size: 0.75rem;
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 950px) {
+
+            .hero {
                 grid-template-columns: 1fr;
+
+                padding-top: 120px;
             }
 
+            .hero-content {
+                text-align: center;
+
+                margin: auto;
+            }
+
+            .hero-text {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .globe-area {
+                height: 500px;
+            }
+
+            .data-strip {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .cards,
+            .steps {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        @media (max-width: 650px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                gap: 13px;
+            }
+
+            .nav-links a {
+                font-size: 0.75rem;
+            }
+
+            .logo {
+                font-size: 1rem;
+            }
+
+            .hero {
+                padding-left: 25px;
+                padding-right: 25px;
+            }
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+
+            .globe-area {
+                height: 400px;
+            }
+
+            .data-strip {
+                grid-template-columns: 1fr;
+                margin-left: 25px;
+                margin-right: 25px;
+            }
+
+            .data-item {
+                border-right: none;
+
+                border-bottom:
+                    1px solid rgba(90, 210, 240, 0.1);
+            }
+
+            .section {
+                padding: 90px 25px;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
         }
 
     </style>
@@ -176,635 +624,658 @@
 <body>
 
 
-    <header>
+    <!-- =========================================================
+         NAVIGATION
+    ========================================================= -->
 
-        <h1>🌊 OCEANVISTA</h1>
+    <nav class="navbar">
 
-        <p>
-            Interactive 3D Ocean Model Visualization Platform
+        <a href="index.html" class="logo">
+            OCEANVISTA
+        </a>
+
+        <div class="nav-links">
+
+            <a href="index.html" class="active">
+                Home
+            </a>
+
+            <a href="explorer.html">
+                Explorer
+            </a>
+
+            <a href="data.html">
+                Data &amp; Analysis
+            </a>
+
+            <a href="about.html">
+                About
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================================================
+         HERO
+    ========================================================= -->
+
+    <section class="hero">
+
+
+        <div class="hero-content">
+
+            <div class="eyebrow">
+                INTERACTIVE OCEAN VISUALIZATION
+            </div>
+
+
+            <h1>
+                Explore the
+                <span>Ocean.</span>
+                <br>
+                Understand
+                its motion.
+            </h1>
+
+
+            <p class="hero-text">
+
+                OCEANVISTA is an interactive 3D platform
+                for exploring numerical ocean model outputs
+                and understanding how ocean conditions change
+                across location and depth.
+
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a
+                    href="explorer.html"
+                    class="primary-btn"
+                >
+                    Explore Ocean Data →
+                </a>
+
+
+                <a
+                    href="#how-it-works"
+                    class="secondary-btn"
+                >
+                    How It Works
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================================
+             ROTATING EARTH
+        ====================================================== -->
+
+        <div class="globe-area">
+
+            <div id="globe"></div>
+
+            <div class="globe-label">
+                GLOBAL OCEAN MODEL · 3D
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =========================================================
+         DATA STRIP
+    ========================================================= -->
+
+    <section class="data-strip">
+
+        <div class="data-item">
+
+            <small>
+                VISUALIZATION
+            </small>
+
+            <strong>
+                Interactive 3D Ocean
+            </strong>
+
+        </div>
+
+
+        <div class="data-item">
+
+            <small>
+                VARIABLE
+            </small>
+
+            <strong>
+                Ocean Temperature
+            </strong>
+
+        </div>
+
+
+        <div class="data-item">
+
+            <small>
+                DIMENSIONS
+            </small>
+
+            <strong>
+                Latitude · Longitude · Depth
+            </strong>
+
+        </div>
+
+
+        <div class="data-item">
+
+            <small>
+                DATA SOURCE
+            </small>
+
+            <strong>
+                Copernicus Marine
+            </strong>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         FEATURES
+    ========================================================= -->
+
+    <section class="section">
+
+        <div class="section-label">
+            WHAT OCEANVISTA DOES
+        </div>
+
+
+        <h2>
+            See the ocean as data.
+        </h2>
+
+
+        <p class="section-intro">
+
+            Transform complex ocean model outputs into
+            an interactive visual experience. Explore
+            ocean conditions spatially and investigate
+            how they change beneath the surface.
+
         </p>
 
-    </header>
 
+        <div class="cards">
 
-    <div class="container">
-
-
-        <!-- CONTROL PANEL -->
-
-        <div class="controls">
-
-
-            <div class="input-group">
-
-                <label>
-                    Latitude
-                </label>
-
-                <input
-                    id="latitude"
-                    type="number"
-                    step="0.01"
-                    value="18.52"
-                >
-
-            </div>
-
-
-            <div class="input-group">
-
-                <label>
-                    Longitude
-                </label>
-
-                <input
-                    id="longitude"
-                    type="number"
-                    step="0.01"
-                    value="73.85"
-                >
-
-            </div>
-
-
-            <div class="input-group">
-
-                <label>
-                    Ocean Variable
-                </label>
-
-                <select id="variable">
-
-                    <option value="temperature">
-                        Temperature
-                    </option>
-
-                    <option value="salinity">
-                        Salinity
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <button onclick="loadOceanData()">
-
-                Explore Ocean
-
-            </button>
-
-
-        </div>
-
-
-        <div
-            class="status"
-            id="status"
-        >
-
-            Ready to explore ocean data.
-
-        </div>
-
-
-        <!-- DASHBOARD -->
-
-        <div class="dashboard">
-
-
-            <!-- 3D MODEL -->
 
             <div class="card">
 
-                <h2>
-                    3D Ocean Model
-                </h2>
-
-                <div id="ocean3d"></div>
-
-            </div>
-
-
-            <!-- LOCATION INFORMATION -->
-
-            <div class="card">
-
-
-                <h2>
-                    Selected Location
-                </h2>
-
-
-                <div class="info-grid">
-
-
-                    <div class="info-box">
-
-                        <span>
-                            Latitude
-                        </span>
-
-                        <strong id="selectedLat">
-                            --
-                        </strong>
-
-                    </div>
-
-
-                    <div class="info-box">
-
-                        <span>
-                            Longitude
-                        </span>
-
-                        <strong id="selectedLon">
-                            --
-                        </strong>
-
-                    </div>
-
-
+                <div class="card-number">
+                    01 / VISUALIZE
                 </div>
 
+                <h3>
+                    3D Ocean Model
+                </h3>
 
-                <h2 style="margin-top:25px;">
+                <p>
+                    Visualize ocean data across latitude,
+                    longitude and depth through an
+                    interactive three-dimensional view.
+                </p>
 
-                    Ocean Profile
-
-                </h2>
-
-
-                <table class="depth-table">
-
-
-                    <thead>
-
-                        <tr>
-
-                            <th>
-                                Depth (m)
-                            </th>
-
-                            <th>
-                                Temperature (°C)
-                            </th>
-
-                            <th>
-                                Salinity
-                            </th>
-
-                        </tr>
-
-                    </thead>
+            </div>
 
 
-                    <tbody id="oceanTable">
+            <div class="card">
 
-                    </tbody>
+                <div class="card-number">
+                    02 / EXPLORE
+                </div>
+
+                <h3>
+                    Select a Location
+                </h3>
+
+                <p>
+                    Search for a location or work with
+                    geographic coordinates to investigate
+                    the surrounding ocean data.
+                </p>
+
+            </div>
 
 
-                </table>
+            <div class="card">
 
+                <div class="card-number">
+                    03 / UNDERSTAND
+                </div>
+
+                <h3>
+                    Analyze Conditions
+                </h3>
+
+                <p>
+                    Examine temperature variations
+                    through different depths and
+                    understand the structure of the ocean.
+                </p>
 
             </div>
 
 
         </div>
 
+    </section>
 
-    </div>
 
 
+    <!-- =========================================================
+         HOW IT WORKS
+    ========================================================= -->
+
+    <section
+        class="section workflow"
+        id="how-it-works"
+    >
+
+        <div class="section-label">
+            HOW IT WORKS
+        </div>
+
+
+        <h2>
+            From location to visualization.
+        </h2>
+
+
+        <p class="section-intro">
+
+            OCEANVISTA connects geographic selection,
+            ocean model data and 3D visualization into
+            one exploration workflow.
+
+        </p>
+
+
+        <div class="steps">
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    STEP 01
+                </div>
+
+                <h3>
+                    Select a location
+                </h3>
+
+                <p>
+                    Choose an ocean location using
+                    the interactive Explorer and
+                    geographic coordinates.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    STEP 02
+                </div>
+
+                <h3>
+                    Load ocean data
+                </h3>
+
+                <p>
+                    The platform retrieves ocean
+                    model information for the
+                    selected region.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    STEP 03
+                </div>
+
+                <h3>
+                    Explore in 3D
+                </h3>
+
+                <p>
+                    Interact with the resulting
+                    visualization and examine
+                    temperature across depth.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         CTA
+    ========================================================= -->
+
+    <section class="cta">
+
+        <div class="section-label">
+            START EXPLORING
+        </div>
+
+
+        <h2>
+            Dive beneath the surface.
+        </h2>
+
+
+        <p>
+            Explore the ocean through data,
+            visualization and interactive
+            three-dimensional models.
+        </p>
+
+
+        <a
+            href="explorer.html"
+            class="primary-btn"
+        >
+            Open Ocean Explorer →
+        </a>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================= -->
+
+    <footer>
+
+        <div class="footer-brand">
+            OCEANVISTA
+        </div>
+
+        <div class="footer-text">
+            Interactive Ocean Exploration · 3D Ocean Model · Copernicus Marine Data
+        </div>
+
+    </footer>
+
+
+
+    <!-- =========================================================
+         ROTATING EARTH
+    ========================================================= -->
 
     <script>
 
+        const container =
+            document.getElementById("globe");
 
-        async function loadOceanData() {
 
+        const scene =
+            new THREE.Scene();
 
-            const latitude =
-                document.getElementById(
-                    "latitude"
-                ).value;
 
+        const camera =
+            new THREE.PerspectiveCamera(
+                45,
+                container.clientWidth /
+                container.clientHeight,
+                0.1,
+                1000
+            );
 
-            const longitude =
-                document.getElementById(
-                    "longitude"
-                ).value;
 
+        camera.position.z = 2.8;
 
-            const status =
-                document.getElementById(
-                    "status"
-                );
 
+        const renderer =
+            new THREE.WebGLRenderer({
+                antialias: true,
+                alpha: true
+            });
 
-            status.textContent =
-                "Loading ocean data...";
 
+        renderer.setPixelRatio(
+            Math.min(window.devicePixelRatio, 2)
+        );
 
-            try {
 
+        renderer.setSize(
+            container.clientWidth,
+            container.clientHeight
+        );
 
-                /*
-                 * Get complete ocean grid.
-                 */
 
-                const gridResponse =
-                    await fetch(
-                        "/ocean-grid"
-                    );
+        container.appendChild(
+            renderer.domElement
+        );
 
 
-                if (!gridResponse.ok) {
+        /* =====================================================
+           EARTH
+        ====================================================== */
 
-                    throw new Error(
-                        "Ocean grid API failed"
-                    );
+        const geometry =
+            new THREE.SphereGeometry(
+                1,
+                64,
+                64
+            );
 
-                }
 
+        /*
+         * Earth texture
+         */
+        const textureLoader =
+            new THREE.TextureLoader();
 
-                const gridData =
-                    await gridResponse.json();
 
+        const earthTexture =
+            textureLoader.load(
+                "https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg"
+            );
 
-                /*
-                 * Get selected location.
-                 */
 
-                const locationResponse =
-                    await fetch(
-                        `/ocean-data?latitude=${latitude}&longitude=${longitude}`
-                    );
+        const earthNormal =
+            textureLoader.load(
+                "https://threejs.org/examples/textures/planets/earth_normal_2048.jpg"
+            );
 
 
-                if (!locationResponse.ok) {
+        const earthSpecular =
+            textureLoader.load(
+                "https://threejs.org/examples/textures/planets/earth_specular_2048.jpg"
+            );
 
-                    throw new Error(
-                        "Ocean location API failed"
-                    );
 
-                }
+        const material =
+            new THREE.MeshPhongMaterial({
 
+                map: earthTexture,
 
-                const locationData =
-                    await locationResponse.json();
+                normalMap: earthNormal,
 
+                specularMap: earthSpecular,
 
-                /*
-                 * Display selected location.
-                 */
+                specular:
+                    new THREE.Color(0x333333),
 
-                document.getElementById(
-                    "selectedLat"
-                ).textContent =
-                    locationData.latitude;
+                shininess: 12
 
+            });
 
-                document.getElementById(
-                    "selectedLon"
-                ).textContent =
-                    locationData.longitude;
 
+        const earth =
+            new THREE.Mesh(
+                geometry,
+                material
+            );
 
-                /*
-                 * Create 3D visualization.
-                 */
 
-                create3DVisualization(
-                    gridData
-                );
+        scene.add(earth);
 
 
-                /*
-                 * Create profile table.
-                 */
 
-                createOceanTable(
-                    locationData
-                );
+        /* =====================================================
+           ATMOSPHERE
+        ====================================================== */
 
+        const atmosphereGeometry =
+            new THREE.SphereGeometry(
+                1.04,
+                64,
+                64
+            );
 
-                status.textContent =
-                    "Ocean data loaded successfully.";
 
+        const atmosphereMaterial =
+            new THREE.MeshBasicMaterial({
 
-            }
+                color: 0x42dfff,
 
+                transparent: true,
 
-            catch (error) {
+                opacity: 0.10,
 
+                side: THREE.BackSide
 
-                console.error(error);
+            });
 
 
-                status.textContent =
-                    "Unable to load ocean data.";
+        const atmosphere =
+            new THREE.Mesh(
+                atmosphereGeometry,
+                atmosphereMaterial
+            );
 
-            }
 
-        }
+        scene.add(atmosphere);
 
 
 
-        function create3DVisualization(data) {
+        /* =====================================================
+           LIGHTING
+        ====================================================== */
 
+        const ambientLight =
+            new THREE.AmbientLight(
+                0x6b8fa3,
+                0.7
+            );
 
-            const latitudes =
-                data.latitude;
 
+        scene.add(ambientLight);
 
-            const longitudes =
-                data.longitude;
 
+        const directionalLight =
+            new THREE.DirectionalLight(
+                0xffffff,
+                2
+            );
 
-            const depths =
-                data.depth;
 
+        directionalLight.position.set(
+            4,
+            2,
+            5
+        );
 
-            /*
-             * Read selected variable.
-             */
 
-            const variable =
-                document.getElementById(
-                    "variable"
-                ).value;
+        scene.add(
+            directionalLight
+        );
 
 
-            const values =
-                data[variable];
 
+        /* =====================================================
+           ROTATION
+        ====================================================== */
 
-            const x = [];
+        function animate() {
 
-            const y = [];
+            requestAnimationFrame(
+                animate
+            );
 
-            const z = [];
 
-            const variableValues = [];
+            earth.rotation.y += 0.0018;
 
 
-            /*
-             * Convert the 3D dataset
-             * into Plotly points.
-             */
+            atmosphere.rotation.y += 0.0018;
 
-            for (
-                let i = 0;
-                i < latitudes.length;
-                i++
-            ) {
 
-
-                for (
-                    let j = 0;
-                    j < longitudes.length;
-                    j++
-                ) {
-
-
-                    for (
-                        let k = 0;
-                        k < depths.length;
-                        k++
-                    ) {
-
-
-                        x.push(
-                            longitudes[j]
-                        );
-
-
-                        y.push(
-                            latitudes[i]
-                        );
-
-
-                        z.push(
-                            -depths[k]
-                        );
-
-
-                        variableValues.push(
-                            values[i][j][k]
-                        );
-
-
-                    }
-
-                }
-
-            }
-
-
-            /*
-             * Choose colorbar title.
-             */
-
-            const colorbarTitle =
-                variable === "temperature"
-                    ? "Temperature °C"
-                    : "Salinity";
-
-
-            /*
-             * Create 3D Plotly trace.
-             */
-
-            const trace = {
-
-
-                x: x,
-
-                y: y,
-
-                z: z,
-
-
-                mode: "markers",
-
-
-                type: "scatter3d",
-
-
-                marker: {
-
-                    size: 8,
-
-                    color: variableValues,
-
-                    colorscale: "Turbo",
-
-                    colorbar: {
-
-                        title:
-                            colorbarTitle
-
-                    }
-
-                },
-
-
-                text:
-
-                    variableValues.map(
-                        (value, index) =>
-
-                            `${colorbarTitle}: ${value}<br>
-                             Longitude: ${x[index]}<br>
-                             Latitude: ${y[index]}<br>
-                             Depth: ${-z[index]} m`
-
-                    ),
-
-
-                hovertemplate:
-                    "%{text}<extra></extra>"
-
-            };
-
-
-            /*
-             * Plot layout.
-             */
-
-            const layout = {
-
-
-                paper_bgcolor:
-                    "#0b3048",
-
-
-                plot_bgcolor:
-                    "#0b3048",
-
-
-                scene: {
-
-
-                    xaxis: {
-
-                        title:
-                            "Longitude"
-
-                    },
-
-
-                    yaxis: {
-
-                        title:
-                            "Latitude"
-
-                    },
-
-
-                    zaxis: {
-
-                        title:
-                            "Depth (m)"
-
-                    },
-
-
-                    bgcolor:
-                        "#0b3048"
-
-                },
-
-
-                margin: {
-
-                    l: 0,
-
-                    r: 0,
-
-                    b: 0,
-
-                    t: 0
-
-                }
-
-            };
-
-
-            Plotly.newPlot(
-
-                "ocean3d",
-
-                [trace],
-
-                layout,
-
-                {
-                    responsive: true
-                }
-
+            renderer.render(
+                scene,
+                camera
             );
 
         }
 
 
+        animate();
 
-        function createOceanTable(data) {
 
 
-            const table =
-                document.getElementById(
-                    "oceanTable"
+        /* =====================================================
+           RESPONSIVE RESIZE
+        ====================================================== */
+
+        window.addEventListener(
+            "resize",
+            () => {
+
+                const width =
+                    container.clientWidth;
+
+                const height =
+                    container.clientHeight;
+
+
+                camera.aspect =
+                    width / height;
+
+
+                camera.updateProjectionMatrix();
+
+
+                renderer.setSize(
+                    width,
+                    height
                 );
 
-
-            table.innerHTML = "";
-
-
-            for (
-                let i = 0;
-                i < data.depth.length;
-                i++
-            ) {
-
-
-                const row =
-                    document.createElement(
-                        "tr"
-                    );
-
-
-                row.innerHTML = `
-
-                    <td>
-                        ${data.depth[i]}
-                    </td>
-
-                    <td>
-                        ${data.temperature[i]}
-                    </td>
-
-                    <td>
-                        ${data.salinity[i]}
-                    </td>
-
-                `;
-
-
-                table.appendChild(row);
-
             }
-
-        }
-
-
-
-        /*
-         * Load dashboard automatically.
-         */
-
-        loadOceanData();
-
+        );
 
     </script>
 
