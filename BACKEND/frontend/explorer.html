@@ -24,15 +24,9 @@
 
         body {
             font-family: "Segoe UI", Arial, sans-serif;
-
             background:
-                radial-gradient(
-                    circle at 70% 10%,
-                    rgba(16, 104, 145, 0.18),
-                    transparent 30%
-                ),
+                radial-gradient(circle at 70% 10%, rgba(16, 104, 145, 0.18), transparent 30%),
                 #040d16;
-
             color: #eaf8ff;
             line-height: 1.6;
             min-height: 100vh;
@@ -53,21 +47,15 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-
             height: 72px;
             padding: 0 42px;
-
             display: flex;
             align-items: center;
             justify-content: space-between;
-
             background: rgba(4, 13, 22, 0.82);
-
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
-
-            border-bottom:
-                1px solid rgba(89, 191, 225, 0.12);
+            border-bottom: 1px solid rgba(89, 191, 225, 0.12);
         }
 
         .logo {
@@ -115,10 +103,7 @@
 
         .page-header h1 {
             max-width: 800px;
-
-            font-size:
-                clamp(2.5rem, 5vw, 4.6rem);
-
+            font-size: clamp(2.5rem, 5vw, 4.6rem);
             line-height: 1.02;
             letter-spacing: -2px;
             margin-bottom: 22px;
@@ -138,11 +123,9 @@
             position: absolute;
             right: 40px;
             bottom: 60px;
-
             display: flex;
             align-items: center;
             gap: 9px;
-
             color: #9cb7c4;
             font-size: 0.82rem;
         }
@@ -152,18 +135,13 @@
             height: 8px;
             border-radius: 50%;
             background: #50e3b2;
-            box-shadow:
-                0 0 12px rgba(80, 227, 178, 0.8);
+            box-shadow: 0 0 12px rgba(80, 227, 178, 0.8);
         }
 
         /* ================= CONTAINER ================= */
 
         .container {
-            width: min(
-                1450px,
-                calc(100% - 80px)
-            );
-
+            width: min(1450px, calc(100% - 80px));
             margin: auto;
             padding-bottom: 80px;
         }
@@ -172,21 +150,10 @@
 
         .control-panel {
             position: relative;
-
             padding: 24px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(12, 43, 61, 0.88),
-                    rgba(5, 23, 35, 0.9)
-                );
-
-            border:
-                1px solid rgba(85, 217, 245, 0.14);
-
+            background: linear-gradient(135deg, rgba(12, 43, 61, 0.88), rgba(5, 23, 35, 0.9));
+            border: 1px solid rgba(85, 217, 245, 0.14);
             border-radius: 18px;
-
             box-shadow:
                 0 20px 60px rgba(0, 0, 0, 0.25),
                 inset 0 1px rgba(255, 255, 255, 0.03);
@@ -213,15 +180,9 @@
 
         .data-badge {
             padding: 7px 12px;
-
             border-radius: 999px;
-
-            background:
-                rgba(43, 180, 220, 0.08);
-
-            border:
-                1px solid rgba(85, 217, 245, 0.16);
-
+            background: rgba(43, 180, 220, 0.08);
+            border: 1px solid rgba(85, 217, 245, 0.16);
             color: #6bdff9;
             font-size: 0.72rem;
             letter-spacing: 1px;
@@ -235,21 +196,16 @@
 
         .search-label {
             display: block;
-
             color: #8ca9b7;
-
             font-size: 0.76rem;
             font-weight: 600;
             letter-spacing: 0.5px;
-
             margin-bottom: 8px;
         }
 
         .search-row {
             display: grid;
-            grid-template-columns:
-                minmax(0, 1fr) auto;
-
+            grid-template-columns: minmax(0, 1fr) auto;
             gap: 12px;
         }
 
@@ -259,43 +215,21 @@
 
         .search-icon {
             position: absolute;
-
             left: 15px;
             top: 50%;
-
-            transform:
-                translateY(-50%);
-
+            transform: translateY(-50%);
             color: #55d9f5;
             font-size: 1rem;
-
             pointer-events: none;
         }
 
         .search-input {
             width: 100%;
-
-            padding:
-                14px
-                16px
-                14px
-                44px;
-
+            padding: 14px 16px 14px 44px;
             border-radius: 11px;
-
-            border:
-                1px solid rgba(
-                    92,
-                    157,
-                    181,
-                    0.22
-                );
-
-            background:
-                rgba(2, 13, 21, 0.75);
-
+            border: 1px solid rgba(92, 157, 181, 0.22);
+            background: rgba(2, 13, 21, 0.75);
             color: #e9fbff;
-
             outline: none;
         }
 
@@ -304,45 +238,26 @@
         }
 
         .search-input:focus {
-            border-color:
-                rgba(85, 217, 245, 0.65);
-
-            box-shadow:
-                0 0 0 3px
-                rgba(85, 217, 245, 0.08);
+            border-color: rgba(85, 217, 245, 0.65);
+            box-shadow: 0 0 0 3px rgba(85, 217, 245, 0.08);
         }
 
         .search-btn {
             min-width: 125px;
-
             padding: 0 22px;
-
             border-radius: 11px;
-
-            background:
-                rgba(30, 150, 190, 0.16);
-
-            border:
-                1px solid rgba(
-                    85,
-                    217,
-                    245,
-                    0.25
-                );
-
+            background: rgba(30, 150, 190, 0.16);
+            border: 1px solid rgba(85, 217, 245, 0.25);
             color: #65ddfa;
-
             font-weight: 700;
         }
 
         .search-btn:hover {
-            background:
-                rgba(30, 150, 190, 0.25);
+            background: rgba(30, 150, 190, 0.25);
         }
 
         .search-hint {
             margin-top: 8px;
-
             color: #587987;
             font-size: 0.7rem;
         }
@@ -351,23 +266,16 @@
 
         .coordinates-label {
             color: #587987;
-
             font-size: 0.68rem;
             letter-spacing: 1.5px;
-
             margin-bottom: 10px;
-
             text-transform: uppercase;
         }
 
         .controls {
             display: grid;
-
-            grid-template-columns:
-                1fr 1fr auto;
-
+            grid-template-columns: 1fr 1fr auto;
             gap: 16px;
-
             align-items: end;
         }
 
@@ -379,7 +287,6 @@
 
         .input-group label {
             color: #8ca9b7;
-
             font-size: 0.76rem;
             font-weight: 600;
         }
@@ -390,80 +297,45 @@
 
         .input-wrapper span {
             position: absolute;
-
             right: 14px;
             top: 50%;
-
-            transform:
-                translateY(-50%);
-
+            transform: translateY(-50%);
             color: #557887;
             font-size: 0.78rem;
         }
 
         input {
             width: 100%;
-
-            padding:
-                13px
-                52px
-                13px
-                15px;
-
+            padding: 13px 52px 13px 15px;
             border-radius: 10px;
-
-            border:
-                1px solid rgba(
-                    92,
-                    157,
-                    181,
-                    0.22
-                );
-
-            background:
-                rgba(2, 13, 21, 0.75);
-
+            border: 1px solid rgba(92, 157, 181, 0.22);
+            background: rgba(2, 13, 21, 0.75);
             color: #e9fbff;
-
             outline: none;
         }
 
         input:focus {
-            border-color:
-                rgba(85, 217, 245, 0.65);
+            border-color: rgba(85, 217, 245, 0.65);
         }
 
         .explore-btn {
             min-height: 46px;
-
             padding: 0 28px;
-
             border: none;
             border-radius: 10px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #31c7ed,
-                    #168db7
-                );
-
+            background: linear-gradient(135deg, #31c7ed, #168db7);
             color: #02141e;
-
             font-weight: 800;
             font-size: 0.86rem;
         }
 
         .explore-btn:hover {
-            transform:
-                translateY(-2px);
+            transform: translateY(-2px);
         }
 
         .status {
             margin-top: 15px;
-
             min-height: 22px;
-
             color: #7193a3;
             font-size: 0.78rem;
         }
@@ -472,54 +344,25 @@
 
         .dashboard {
             display: grid;
-
-            grid-template-columns:
-                minmax(0, 2.1fr)
-                minmax(320px, 0.9fr);
-
+            grid-template-columns: minmax(0, 2.1fr) minmax(320px, 0.9fr);
             gap: 20px;
-
             margin-top: 22px;
         }
 
         .card {
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(10, 37, 52, 0.94),
-                    rgba(5, 20, 31, 0.94)
-                );
-
-            border:
-                1px solid rgba(
-                    89,
-                    176,
-                    204,
-                    0.12
-                );
-
+            background: linear-gradient(145deg, rgba(10, 37, 52, 0.94), rgba(5, 20, 31, 0.94));
+            border: 1px solid rgba(89, 176, 204, 0.12);
             border-radius: 18px;
             overflow: hidden;
-
-            box-shadow:
-                0 18px 50px
-                rgba(0, 0, 0, 0.2);
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.2);
         }
 
         .card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-
             padding: 20px 22px;
-
-            border-bottom:
-                1px solid rgba(
-                    100,
-                    170,
-                    195,
-                    0.09
-                );
+            border-bottom: 1px solid rgba(100, 170, 195, 0.09);
         }
 
         .card-header h2 {
@@ -535,7 +378,6 @@
 
         .live-label {
             color: #63dff7;
-
             font-size: 0.67rem;
             letter-spacing: 1.5px;
             font-weight: 700;
@@ -545,15 +387,9 @@
 
         .visual-container {
             position: relative;
-
             height: 610px;
-
             background:
-                radial-gradient(
-                    circle at center,
-                    rgba(18, 94, 126, 0.12),
-                    transparent 55%
-                ),
+                radial-gradient(circle at center, rgba(18, 94, 126, 0.12), transparent 55%),
                 #06141f;
         }
 
@@ -564,28 +400,14 @@
 
         .visual-overlay {
             position: absolute;
-
             left: 18px;
             bottom: 18px;
-
             padding: 10px 13px;
-
-            background:
-                rgba(2, 12, 19, 0.76);
-
-            border:
-                1px solid rgba(
-                    100,
-                    190,
-                    215,
-                    0.12
-                );
-
+            background: rgba(2, 12, 19, 0.76);
+            border: 1px solid rgba(100, 190, 215, 0.12);
             border-radius: 9px;
-
             color: #7895a3;
             font-size: 0.7rem;
-
             pointer-events: none;
         }
 
@@ -601,42 +423,24 @@
 
         .coordinates {
             display: grid;
-
-            grid-template-columns:
-                1fr 1fr;
-
+            grid-template-columns: 1fr 1fr;
             gap: 10px;
-
             margin-bottom: 28px;
         }
 
         .info-box {
             padding: 16px;
-
-            background:
-                rgba(2, 16, 25, 0.7);
-
-            border:
-                1px solid rgba(
-                    89,
-                    170,
-                    195,
-                    0.1
-                );
-
+            background: rgba(2, 16, 25, 0.7);
+            border: 1px solid rgba(89, 170, 195, 0.1);
             border-radius: 12px;
         }
 
         .info-box span {
             display: block;
-
             color: #668492;
-
             font-size: 0.68rem;
-
             text-transform: uppercase;
             letter-spacing: 1px;
-
             margin-bottom: 7px;
         }
 
@@ -649,7 +453,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-
             margin-bottom: 14px;
         }
 
@@ -667,15 +470,7 @@
         .table-wrapper {
             max-height: 405px;
             overflow-y: auto;
-
-            border:
-                1px solid rgba(
-                    89,
-                    170,
-                    195,
-                    0.08
-                );
-
+            border: 1px solid rgba(89, 170, 195, 0.08);
             border-radius: 11px;
         }
 
@@ -687,28 +482,16 @@
         .depth-table th,
         .depth-table td {
             padding: 11px 13px;
-
             text-align: left;
-
-            border-bottom:
-                1px solid rgba(
-                    89,
-                    170,
-                    195,
-                    0.07
-                );
-
+            border-bottom: 1px solid rgba(89, 170, 195, 0.07);
             font-size: 0.75rem;
         }
 
         .depth-table th {
             position: sticky;
             top: 0;
-
             background: #092333;
-
             color: #7295a5;
-
             font-size: 0.66rem;
             text-transform: uppercase;
         }
@@ -721,42 +504,24 @@
 
         .data-strip {
             display: grid;
-
-            grid-template-columns:
-                repeat(4, 1fr);
-
+            grid-template-columns: repeat(4, 1fr);
             gap: 12px;
-
             margin-top: 22px;
         }
 
         .data-stat {
             padding: 19px;
-
-            background:
-                rgba(7, 28, 41, 0.8);
-
-            border:
-                1px solid rgba(
-                    89,
-                    170,
-                    195,
-                    0.1
-                );
-
+            background: rgba(7, 28, 41, 0.8);
+            border: 1px solid rgba(89, 170, 195, 0.1);
             border-radius: 13px;
         }
 
         .data-stat small {
             display: block;
-
             color: #668492;
-
             font-size: 0.65rem;
-
             text-transform: uppercase;
             letter-spacing: 1px;
-
             margin-bottom: 7px;
         }
 
@@ -769,26 +534,16 @@
 
         .footer {
             padding: 35px 40px;
-
-            border-top:
-                1px solid rgba(
-                    89,
-                    170,
-                    195,
-                    0.1
-                );
-
+            border-top: 1px solid rgba(89, 170, 195, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
-
             color: #587582;
             font-size: 0.75rem;
         }
 
         .footer-brand {
             color: #6c8d9b;
-
             font-weight: 700;
             letter-spacing: 1px;
         }
@@ -802,8 +557,7 @@
             }
 
             .data-strip {
-                grid-template-columns:
-                    1fr 1fr;
+                grid-template-columns: 1fr 1fr;
             }
 
             .header-status {
@@ -828,13 +582,11 @@
             }
 
             .page-header {
-                padding:
-                    50px 20px 40px;
+                padding: 50px 20px 40px;
             }
 
             .container {
-                width:
-                    calc(100% - 30px);
+                width: calc(100% - 30px);
             }
 
             .search-row {
@@ -855,10 +607,8 @@
 
             .footer {
                 padding: 30px 20px;
-
                 flex-direction: column;
                 gap: 10px;
-
                 text-align: center;
             }
 
@@ -875,28 +625,13 @@
 
     <nav class="navbar">
 
-        <a href="index.html" class="logo">
-            OCEANVISTA
-        </a>
+        <a href="index.html" class="logo">OCEANVISTA</a>
 
         <div class="nav-links">
-
-            <a href="index.html">
-                Home
-            </a>
-
-            <a href="explorer.html" class="active">
-                Explorer
-            </a>
-
-            <a href="data.html">
-                Data &amp; Analysis
-            </a>
-
-            <a href="about.html">
-                About
-            </a>
-
+            <a href="index.html">Home</a>
+            <a href="explorer.html" class="active">Explorer</a>
+            <a href="data.html">Data &amp; Analysis</a>
+            <a href="about.html">About</a>
         </div>
 
     </nav>
@@ -906,9 +641,7 @@
 
     <header class="page-header">
 
-        <div class="eyebrow">
-            OCEAN EXPLORER
-        </div>
+        <div class="eyebrow">OCEAN EXPLORER</div>
 
         <h1>
             Explore the ocean
@@ -921,11 +654,8 @@
         </p>
 
         <div class="header-status">
-
             <span class="status-dot"></span>
-
             Ocean data system ready
-
         </div>
 
     </header>
@@ -941,20 +671,11 @@
             <div class="control-top">
 
                 <div>
-
-                    <div class="control-title">
-                        Choose an ocean location
-                    </div>
-
-                    <div class="control-subtitle">
-                        Search for a place or enter coordinates manually.
-                    </div>
-
+                    <div class="control-title">Choose an ocean location</div>
+                    <div class="control-subtitle">Search for a place or enter coordinates manually.</div>
                 </div>
 
-                <div class="data-badge">
-                    COPERNICUS DATA
-                </div>
+                <div class="data-badge">COPERNICUS DATA</div>
 
             </div>
 
@@ -963,21 +684,13 @@
 
             <div class="location-search">
 
-                <label
-                    class="search-label"
-                    for="locationSearch"
-                >
-                    SEARCH LOCATION
-                </label>
-
+                <label class="search-label" for="locationSearch">SEARCH LOCATION</label>
 
                 <div class="search-row">
 
                     <div class="search-wrapper">
 
-                        <span class="search-icon">
-                            ⌕
-                        </span>
+                        <span class="search-icon">⌕</span>
 
                         <input
                             id="locationSearch"
@@ -989,16 +702,9 @@
 
                     </div>
 
-
-                    <button
-                        class="search-btn"
-                        onclick="searchLocation()"
-                    >
-                        Search
-                    </button>
+                    <button class="search-btn" onclick="searchLocation()">Search</button>
 
                 </div>
-
 
                 <div class="search-hint">
                     Example: Mumbai, Arabian Sea, Goa, Mediterranean Sea
@@ -1009,81 +715,37 @@
 
             <!-- COORDINATES -->
 
-            <div class="coordinates-label">
-                OR ENTER COORDINATES MANUALLY
-            </div>
-
+            <div class="coordinates-label">OR ENTER COORDINATES MANUALLY</div>
 
             <div class="controls">
 
                 <div class="input-group">
 
-                    <label for="latitude">
-                        LATITUDE
-                    </label>
+                    <label for="latitude">LATITUDE</label>
 
                     <div class="input-wrapper">
-
-                        <input
-                            id="latitude"
-                            type="number"
-                            step="0.01"
-                            min="-90"
-                            max="90"
-                            value="18.90"
-                        >
-
-                        <span>
-                            ° N/S
-                        </span>
-
+                        <input id="latitude" type="number" step="0.01" min="-90" max="90" value="18.90">
+                        <span>° N/S</span>
                     </div>
 
                 </div>
-
 
                 <div class="input-group">
 
-                    <label for="longitude">
-                        LONGITUDE
-                    </label>
+                    <label for="longitude">LONGITUDE</label>
 
                     <div class="input-wrapper">
-
-                        <input
-                            id="longitude"
-                            type="number"
-                            step="0.01"
-                            min="-180"
-                            max="180"
-                            value="72.80"
-                        >
-
-                        <span>
-                            ° E/W
-                        </span>
-
+                        <input id="longitude" type="number" step="0.01" min="-180" max="180" value="72.80">
+                        <span>° E/W</span>
                     </div>
 
                 </div>
 
-
-                <button
-                    class="explore-btn"
-                    onclick="loadOceanData()"
-                >
-                    Explore Ocean →
-                </button>
+                <button class="explore-btn" onclick="loadOceanData()">Explore Ocean →</button>
 
             </div>
 
-
-            <div
-                class="status"
-                id="status"
-            >
-                Ready to explore real ocean data.
-            </div>
+            <div class="status" id="status">Ready to explore real ocean data.</div>
 
         </section>
 
@@ -1092,7 +754,6 @@
 
         <section class="dashboard">
 
-
             <!-- 3D MODEL -->
 
             <div class="card">
@@ -1100,23 +761,13 @@
                 <div class="card-header">
 
                     <div>
-
-                        <h2>
-                            3D Ocean Temperature Model
-                        </h2>
-
-                        <p>
-                            Spatial temperature distribution by depth
-                        </p>
-
+                        <h2>3D Ocean Temperature Model</h2>
+                        <p>Spatial temperature distribution by depth</p>
                     </div>
 
-                    <div class="live-label">
-                        ● LIVE DATA
-                    </div>
+                    <div class="live-label">● LIVE DATA</div>
 
                 </div>
-
 
                 <div class="visual-container">
 
@@ -1138,88 +789,45 @@
                 <div class="card-header">
 
                     <div>
-
-                        <h2>
-                            Selected Location
-                        </h2>
-
-                        <p>
-                            Current ocean profile
-                        </p>
-
+                        <h2>Selected Location</h2>
+                        <p>Current ocean profile</p>
                     </div>
 
                 </div>
-
 
                 <div class="location-content">
 
                     <div class="coordinates">
 
                         <div class="info-box">
-
-                            <span>
-                                Latitude
-                            </span>
-
-                            <strong id="selectedLat">
-                                --
-                            </strong>
-
+                            <span>Latitude</span>
+                            <strong id="selectedLat">--</strong>
                         </div>
-
 
                         <div class="info-box">
-
-                            <span>
-                                Longitude
-                            </span>
-
-                            <strong id="selectedLon">
-                                --
-                            </strong>
-
+                            <span>Longitude</span>
+                            <strong id="selectedLon">--</strong>
                         </div>
 
                     </div>
 
-
                     <div class="profile-heading">
-
-                        <h3>
-                            Temperature Profile
-                        </h3>
-
-                        <span>
-                            DEPTH / °C
-                        </span>
-
+                        <h3>Temperature Profile</h3>
+                        <span>DEPTH / °C</span>
                     </div>
-
 
                     <div class="table-wrapper">
 
                         <table class="depth-table">
 
                             <thead>
-
                                 <tr>
-
-                                    <th>
-                                        Depth (m)
-                                    </th>
-
-                                    <th>
-                                        Temperature (°C)
-                                    </th>
-
+                                    <th>Depth (m)</th>
+                                    <th>Temperature (°C)</th>
                                 </tr>
-
                             </thead>
 
-                            <tbody id="oceanTable">
-
-                            </tbody>
+                            <tbody id="oceanTable"></tbody>
 
                         </table>
 
@@ -1237,54 +845,23 @@
         <section class="data-strip">
 
             <div class="data-stat">
-
-                <small>
-                    Visualization
-                </small>
-
-                <strong>
-                    3D Ocean Model
-                </strong>
-
+                <small>Visualization</small>
+                <strong>3D Ocean Model</strong>
             </div>
 
-
             <div class="data-stat">
-
-                <small>
-                    Variable
-                </small>
-
-                <strong>
-                    Temperature
-                </strong>
-
+                <small>Variable</small>
+                <strong>Temperature</strong>
             </div>
 
-
             <div class="data-stat">
-
-                <small>
-                    Dimensions
-                </small>
-
-                <strong>
-                    Latitude · Longitude · Depth
-                </strong>
-
+                <small>Dimensions</small>
+                <strong>Latitude · Longitude · Depth</strong>
             </div>
 
-
             <div class="data-stat">
-
-                <small>
-                    Data Source
-                </small>
-
-                <strong>
-                    Copernicus Marine
-                </strong>
-
+                <small>Data Source</small>
+                <strong>Copernicus Marine</strong>
             </div>
 
         </section>
@@ -1296,13 +873,9 @@
 
     <footer class="footer">
 
-        <div class="footer-brand">
-            OCEANVISTA
-        </div>
+        <div class="footer-brand">OCEANVISTA</div>
 
-        <div>
-            Interactive Ocean Exploration · Copernicus Marine Data
-        </div>
+        <div>Interactive Ocean Exploration · Copernicus Marine Data</div>
 
     </footer>
 
@@ -1312,12 +885,12 @@
     <script>
 
         /*
-         * IMPORTANT:
-         * FastAPI backend is running on port 8000.
+         * The website and the FastAPI backend run on the same address,
+         * so API_BASE is empty. Requests go to the same server that
+         * served this page (works on your laptop and on Render).
          */
 
-        const API_BASE =
-            "http://127.0.0.1:8000";
+        const API_BASE = "";
 
 
         /* =====================================================
@@ -1326,108 +899,50 @@
 
         async function searchLocation() {
 
-            const searchInput =
-                document.getElementById(
-                    "locationSearch"
-                );
-
-            const query =
-                searchInput.value.trim();
-
-            const status =
-                document.getElementById(
-                    "status"
-                );
-
+            const searchInput = document.getElementById("locationSearch");
+            const query = searchInput.value.trim();
+            const status = document.getElementById("status");
 
             if (!query) {
-
-                status.textContent =
-                    "Please enter a location to search.";
-
+                status.textContent = "Please enter a location to search.";
                 searchInput.focus();
-
                 return;
-
             }
 
-
-            status.textContent =
-                "Searching for location...";
-
+            status.textContent = "Searching for location...";
 
             try {
 
-                const response =
-                    await fetch(
-                        `https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&q=${encodeURIComponent(query)}`
-                    );
-
+                const response = await fetch(
+                    `https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&q=${encodeURIComponent(query)}`
+                );
 
                 if (!response.ok) {
-
-                    throw new Error(
-                        "Location search failed"
-                    );
-
+                    throw new Error("Location search failed");
                 }
 
+                const results = await response.json();
 
-                const results =
-                    await response.json();
-
-
-                if (
-                    !results ||
-                    results.length === 0
-                ) {
-
-                    status.textContent =
-                        "Location not found. Try another name.";
-
+                if (!results || results.length === 0) {
+                    status.textContent = "Location not found. Try another name.";
                     return;
-
                 }
 
+                const location = results[0];
+                const latitude = Number(location.lat);
+                const longitude = Number(location.lon);
 
-                const location =
-                    results[0];
+                document.getElementById("latitude").value = latitude.toFixed(4);
+                document.getElementById("longitude").value = longitude.toFixed(4);
 
-
-                const latitude =
-                    Number(location.lat);
-
-                const longitude =
-                    Number(location.lon);
-
-
-                document.getElementById(
-                    "latitude"
-                ).value =
-                    latitude.toFixed(4);
-
-
-                document.getElementById(
-                    "longitude"
-                ).value =
-                    longitude.toFixed(4);
-
-
-                status.textContent =
-                    `Location found: ${location.display_name}`;
-
+                status.textContent = `Location found: ${location.display_name}`;
 
                 await loadOceanData();
 
-            }
-
-
-            catch (error) {
+            } catch (error) {
 
                 console.error(error);
-
-                status.textContent =
-                    "Unable to search for that location.";
+                status.textContent = "Unable to search for that location.";
 
             }
 
@@ -1440,20 +955,13 @@
 
         document
             .getElementById("locationSearch")
-            .addEventListener(
-                "keydown",
-                function(event) {
+            .addEventListener("keydown", function (event) {
 
-                    if (
-                        event.key === "Enter"
-                    ) {
-
-                        searchLocation();
-
-                    }
-
+                if (event.key === "Enter") {
+                    searchLocation();
                 }
-            );
+
+            });
 
 
         /* =====================================================
@@ -1462,159 +970,77 @@
 
         async function loadOceanData() {
 
-            const latitude =
-                document.getElementById(
-                    "latitude"
-                ).value;
+            const latitude = document.getElementById("latitude").value;
+            const longitude = document.getElementById("longitude").value;
+            const status = document.getElementById("status");
 
-            const longitude =
-                document.getElementById(
-                    "longitude"
-                ).value;
-
-            const status =
-                document.getElementById(
-                    "status"
-                );
-
-
-            if (
-                latitude === "" ||
-                longitude === ""
-            ) {
-
-                status.textContent =
-                    "Please enter both latitude and longitude.";
-
+            if (latitude === "" || longitude === "") {
+                status.textContent = "Please enter both latitude and longitude.";
                 return;
-
             }
 
-
-            status.textContent =
-                "Loading real Copernicus ocean data...";
-
+            status.textContent = "Loading real Copernicus ocean data...";
 
             try {
 
-                /*
-                 * Get the sampled 3D ocean grid.
-                 */
+                /* Get the sampled 3D ocean grid. */
 
-                const gridResponse =
-                    await fetch(
-                        `${API_BASE}/ocean-grid`
-                    );
-
+                const gridResponse = await fetch(`${API_BASE}/ocean-grid`);
 
                 if (!gridResponse.ok) {
-
-                    throw new Error(
-                        "Ocean grid API failed"
-                    );
-
+                    throw new Error("Ocean grid API failed");
                 }
 
-
-                const gridData =
-                    await gridResponse.json();
+                const gridData = await gridResponse.json();
 
 
-                /*
-                 * Get selected location profile.
-                 */
+                /* Get selected location profile. */
 
-                const locationResponse =
-                    await fetch(
-                        `${API_BASE}/ocean-data?latitude=${latitude}&longitude=${longitude}`
-                    );
-
+                const locationResponse = await fetch(
+                    `${API_BASE}/ocean-data?latitude=${latitude}&longitude=${longitude}`
+                );
 
                 if (!locationResponse.ok) {
-
-                    throw new Error(
-                        "Ocean location API failed"
-                    );
-
+                    throw new Error("Ocean location API failed");
                 }
 
-
-                const locationData =
-                    await locationResponse.json();
+                const locationData = await locationResponse.json();
 
 
-                /*
-                 * Check whether actual
-                 * temperature data exists.
-                 */
+                /* Check whether actual temperature data exists. */
 
                 const hasTemperature =
                     locationData.temperature &&
                     locationData.temperature.some(
-                        value =>
-                            value !== null &&
-                            value !== undefined
+                        value => value !== null && value !== undefined
                     );
 
-
                 if (!hasTemperature) {
-
                     status.textContent =
                         "No ocean temperature data found at this location. Try an ocean coordinate.";
-
                     return;
-
                 }
 
 
-                /*
-                 * Display selected coordinates.
-                 */
+                /* Display selected coordinates. */
 
-                document.getElementById(
-                    "selectedLat"
-                ).textContent =
-                    Number(
-                        locationData.latitude
-                    ).toFixed(2);
+                document.getElementById("selectedLat").textContent =
+                    Number(locationData.latitude).toFixed(2);
+
+                document.getElementById("selectedLon").textContent =
+                    Number(locationData.longitude).toFixed(2);
 
 
-                document.getElementById(
-                    "selectedLon"
-                ).textContent =
-                    Number(
-                        locationData.longitude
-                    ).toFixed(2);
+                /* Create 3D model and temperature table. */
 
+                create3DVisualization(gridData);
+                createOceanTable(locationData);
 
-                /*
-                 * Create 3D model.
-                 */
+                status.textContent = "Real Copernicus ocean data loaded successfully.";
 
-                create3DVisualization(
-                    gridData
-                );
-
-
-                /*
-                 * Create temperature table.
-                 */
-
-                createOceanTable(
-                    locationData
-                );
-
-
-                status.textContent =
-                    "Real Copernicus ocean data loaded successfully.";
-
-            }
-
-
-            catch (error) {
+            } catch (error) {
 
                 console.error(error);
-
                 status.textContent =
                     "Unable to load ocean data. Make sure the FastAPI backend is running.";
 
@@ -1629,78 +1055,34 @@
 
         function create3DVisualization(data) {
 
-            const latitudes =
-                data.latitude;
-
-            const longitudes =
-                data.longitude;
-
-            const depths =
-                data.depth;
-
-            const values =
-                data.temperature;
-
+            const latitudes = data.latitude;
+            const longitudes = data.longitude;
+            const depths = data.depth;
+            const values = data.temperature;
 
             const x = [];
             const y = [];
             const z = [];
-
             const temperatureValues = [];
 
+            /* Convert the 3D dataset into Plotly points. */
 
-            /*
-             * Convert the 3D dataset
-             * into Plotly points.
-             */
+            for (let i = 0; i < latitudes.length; i++) {
 
-            for (
-                let i = 0;
-                i < latitudes.length;
-                i++
-            ) {
+                for (let j = 0; j < longitudes.length; j++) {
 
-                for (
-                    let j = 0;
-                    j < longitudes.length;
-                    j++
-                ) {
+                    for (let k = 0; k < depths.length; k++) {
 
-                    for (
-                        let k = 0;
-                        k < depths.length;
-                        k++
-                    ) {
+                        const value = values[i][j][k];
 
-                        const value =
-                            values[i][j][k];
-
-
-                        if (
-                            value === null ||
-                            value === undefined
-                        ) {
-
+                        if (value === null || value === undefined) {
                             continue;
-
                         }
 
-
-                        x.push(
-                            longitudes[j]
-                        );
-
-                        y.push(
-                            latitudes[i]
-                        );
-
-                        z.push(
-                            -depths[k]
-                        );
-
-                        temperatureValues.push(
-                            value
-                        );
+                        x.push(longitudes[j]);
+                        y.push(latitudes[i]);
+                        z.push(-depths[k]);
+                        temperatureValues.push(value);
 
                     }
 
@@ -1716,230 +1098,95 @@
                 z: z,
 
                 mode: "markers",
-
                 type: "scatter3d",
-
 
                 marker: {
 
                     size: 4,
-
-                    color:
-                        temperatureValues,
+                    color: temperatureValues,
 
                     colorscale: [
-
                         [0, "#123d70"],
-
                         [0.25, "#1679a8"],
-
                         [0.5, "#28b8c8"],
-
                         [0.75, "#f0d75e"],
-
                         [1, "#ef7135"]
-
                     ],
 
                     opacity: 0.82,
 
                     colorbar: {
-
                         title: {
-
-                            text:
-                                "Temperature °C",
-
-                            font: {
-                                color:
-                                    "#b8d9e4"
-                            }
-
+                            text: "Temperature °C",
+                            font: { color: "#b8d9e4" }
                         },
-
-                        tickfont: {
-
-                            color:
-                                "#8eacb8"
-
-                        }
-
+                        tickfont: { color: "#8eacb8" }
                     }
 
                 },
 
+                text: temperatureValues.map(
+                    (value, index) =>
+                        `Temperature: ${Number(value).toFixed(2)} °C<br>
+                         Longitude: ${Number(x[index]).toFixed(2)}<br>
+                         Latitude: ${Number(y[index]).toFixed(2)}<br>
+                         Depth: ${Math.abs(Number(z[index])).toFixed(2)} m`
+                ),
 
-                text:
-                    temperatureValues.map(
-                        (value, index) =>
-
-                            `Temperature: ${Number(value).toFixed(2)} °C<br>
-                             Longitude: ${Number(x[index]).toFixed(2)}<br>
-                             Latitude: ${Number(y[index]).toFixed(2)}<br>
-                             Depth: ${Math.abs(Number(z[index])).toFixed(2)} m`
-                    ),
-
-
-                hovertemplate:
-                    "%{text}<extra></extra>"
+                hovertemplate: "%{text}<extra></extra>"
 
             };
 
 
             const layout = {
 
-                paper_bgcolor:
-                    "#06141f",
+                paper_bgcolor: "#06141f",
+                plot_bgcolor: "#06141f",
 
-                plot_bgcolor:
-                    "#06141f",
-
-
-                font: {
-
-                    color:
-                        "#8faebb"
-
-                },
-
+                font: { color: "#8faebb" },
 
                 scene: {
 
-                    bgcolor:
-                        "#06141f",
-
+                    bgcolor: "#06141f",
 
                     xaxis: {
-
-                        title: {
-
-                            text:
-                                "Longitude",
-
-                            font: {
-                                color:
-                                    "#7e9ba8"
-                            }
-
-                        },
-
-                        tickfont: {
-
-                            color:
-                                "#607d89"
-
-                        },
-
-                        gridcolor:
-                            "rgba(82,145,165,0.12)"
-
+                        title: { text: "Longitude", font: { color: "#7e9ba8" } },
+                        tickfont: { color: "#607d89" },
+                        gridcolor: "rgba(82,145,165,0.12)"
                     },
-
 
                     yaxis: {
-
-                        title: {
-
-                            text:
-                                "Latitude",
-
-                            font: {
-                                color:
-                                    "#7e9ba8"
-                            }
-
-                        },
-
-                        tickfont: {
-
-                            color:
-                                "#607d89"
-
-                        },
-
-                        gridcolor:
-                            "rgba(82,145,165,0.12)"
-
+                        title: { text: "Latitude", font: { color: "#7e9ba8" } },
+                        tickfont: { color: "#607d89" },
+                        gridcolor: "rgba(82,145,165,0.12)"
                     },
-
 
                     zaxis: {
-
-                        title: {
-
-                            text:
-                                "Depth (m)",
-
-                            font: {
-                                color:
-                                    "#7e9ba8"
-                            }
-
-                        },
-
-                        tickfont: {
-
-                            color:
-                                "#607d89"
-
-                        },
-
-                        gridcolor:
-                            "rgba(82,145,165,0.12)"
-
+                        title: { text: "Depth (m)", font: { color: "#7e9ba8" } },
+                        tickfont: { color: "#607d89" },
+                        gridcolor: "rgba(82,145,165,0.12)"
                     },
 
-
                     camera: {
-
-                        eye: {
-
-                            x: 1.45,
-                            y: 1.45,
-                            z: 1.05
-
-                        }
-
+                        eye: { x: 1.45, y: 1.45, z: 1.05 }
                     }
 
                 },
 
-
-                margin: {
-
-                    l: 0,
-                    r: 0,
-                    b: 0,
-                    t: 10
-
-                }
+                margin: { l: 0, r: 0, b: 0, t: 10 }
 
             };
 
 
             Plotly.newPlot(
-
                 "ocean3d",
-
                 [trace],
-
                 layout,
-
                 {
-
                     responsive: true,
-
                     displaylogo: false,
-
-                    modeBarButtonsToRemove: [
-
-                        "lasso2d",
-                        "select2d"
-
-                    ]
-
+                    modeBarButtonsToRemove: ["lasso2d", "select2d"]
                 }
-
             );
 
         }
@@ -1951,56 +1198,26 @@
 
         function createOceanTable(data) {
 
-            const table =
-                document.getElementById(
-                    "oceanTable"
-                );
-
+            const table = document.getElementById("oceanTable");
 
             table.innerHTML = "";
 
+            for (let i = 0; i < data.depth.length; i++) {
 
-            for (
-                let i = 0;
-                i < data.depth.length;
-                i++
-            ) {
+                const temperature = data.temperature[i];
 
-                const temperature =
-                    data.temperature[i];
-
-
-                const row =
-                    document.createElement(
-                        "tr"
-                    );
-
+                const row = document.createElement("tr");
 
                 row.innerHTML = `
-
-                    <td>
-                        ${Number(
-                            data.depth[i]
-                        ).toFixed(2)}
-                    </td>
-
-                    <td>
-                        ${
-                            temperature === null ||
-                            temperature === undefined
-                                ? "No data"
-                                : Number(
-                                    temperature
-                                ).toFixed(2)
-                        }
-                    </td>
-
+                    <td>${Number(data.depth[i]).toFixed(2)}</td>
+                    <td>${
+                        temperature === null || temperature === undefined
+                            ? "No data"
+                            : Number(temperature).toFixed(2)
+                    }</td>
                 `;
 
-
-                table.appendChild(
-                    row
-                );
+                table.appendChild(row);
 
             }
 
