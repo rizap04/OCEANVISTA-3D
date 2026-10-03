@@ -1,19 +1,16 @@
 from fastapi import APIRouter
-from app.services.ocean_service import (
-    get_nearest_ocean_data,
-    load_ocean_data
-)
+from app.services.ocean_service import get_ocean_data
 import numpy as np
 
 
 router = APIRouter()
 
 
+# --------------------------------------------------
+# Convert NaN values to None for JSON
+# --------------------------------------------------
+
 def clean_values(values):
-    """
-    Convert NaN values into None
-    so they can be sent safely as JSON.
-    """
 
     arr = np.asarray(values, dtype=float)
 
@@ -24,85 +21,90 @@ def clean_values(values):
     ).tolist()
 
 
-def sample_indices(size, maximum=20):
-    """
-    Select evenly spaced indices from a dimension.
-
-    This keeps the 3D visualization lightweight
-    instead of sending the complete raw grid
-    to the browser.
-    """
-
-    if size <= maximum:
-        return np.arange(size)
-
-    return np.linspace(
-        0,
-        size - 1,
-        maximum,
-        dtype=int
-    )
-
+# --------------------------------------------------
+# Selected location temperature profile
+# --------------------------------------------------
 
 @router.get("/ocean-data")
-def get_ocean_data(
+def get_ocean_data_endpoint(
     latitude: float,
     longitude: float
 ):
 
-    ocean_data = get_nearest_ocean_data(
-        latitude,
-        longitude
+    ocean_data = get_ocean_data(
+        round(latitude, 2),
+        round(longitude, 2)
+    )
+
+    # Find nearest grid cell
+    selected = ocean_data.sel(
+        latitude=latitude,
+        longitude=longitude,
+        method="nearest"
     )
 
     return {
+
         "latitude": float(
-            ocean_data.latitude.values
+            selected.latitude.values
         ),
 
         "longitude": float(
-            ocean_data.longitude.values
+            selected.longitude.values
         ),
 
         "temperature": clean_values(
-            ocean_data["temperature"].values
+            selected["temperature"].values
         ),
 
         "depth": (
-            ocean_data["depth"]
+            selected["depth"]
             .values
             .tolist()
         )
+
     }
 
 
+# --------------------------------------------------
+# Dynamic 3D ocean grid
+# --------------------------------------------------
+
 @router.get("/ocean-grid")
-def get_ocean_grid():
+def get_ocean_grid(
+    latitude: float,
+    longitude: float
+):
 
-    ocean_data = load_ocean_data()
-
-    # -----------------------------------------
-    # Create a lightweight visualization grid
-    # -----------------------------------------
-
-    latitude_indices = sample_indices(
-        ocean_data.sizes["latitude"],
-        20
+    ocean_data = get_ocean_data(
+        round(latitude, 2),
+        round(longitude, 2)
     )
 
-    longitude_indices = sample_indices(
-        ocean_data.sizes["longitude"],
-        20
+    # ----------------------------------------------
+    # Select a lightweight local grid
+    # ----------------------------------------------
+
+    latitude_indices = np.linspace(
+        0,
+        ocean_data.sizes["latitude"] - 1,
+        min(7, ocean_data.sizes["latitude"]),
+        dtype=int
     )
 
-    depth_indices = sample_indices(
-        ocean_data.sizes["depth"],
-        20
+    longitude_indices = np.linspace(
+        0,
+        ocean_data.sizes["longitude"] - 1,
+        min(7, ocean_data.sizes["longitude"]),
+        dtype=int
     )
 
-    # -----------------------------------------
-    # Select only the required points
-    # -----------------------------------------
+    depth_indices = np.linspace(
+        0,
+        ocean_data.sizes["depth"] - 1,
+        min(15, ocean_data.sizes["depth"]),
+        dtype=int
+    )
 
     sampled_data = ocean_data.isel(
         latitude=latitude_indices,
@@ -110,11 +112,8 @@ def get_ocean_grid():
         depth=depth_indices
     )
 
-    # -----------------------------------------
-    # Send compact grid to frontend
-    # -----------------------------------------
-
     return {
+
         "latitude":
             sampled_data["latitude"]
             .values
@@ -134,4 +133,5 @@ def get_ocean_grid():
             clean_values(
                 sampled_data["temperature"].values
             )
+
     }
