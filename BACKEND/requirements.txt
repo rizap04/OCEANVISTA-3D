@@ -4,3 +4,4 @@ numpy
 pandas
 xarray
 netCDF4
+global-land-masks
