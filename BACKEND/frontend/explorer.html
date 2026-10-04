@@ -402,15 +402,217 @@
             position: relative;
             height: 610px;
             background:
-                radial-gradient(circle at center, rgba(18, 94, 126, 0.12), transparent 55%),
-                #06141f;
+                radial-gradient(circle at 50% 42%, rgba(18, 116, 158, 0.20), transparent 42%),
+                radial-gradient(circle at 20% 20%, rgba(20, 79, 120, 0.12), transparent 32%),
+                #020a12;
             overflow: hidden;
+            border-top: 1px solid rgba(85, 217, 245, 0.06);
         }
 
         #ocean3d {
             width: 100%;
             height: 100%;
         }
+
+        /* Cinematic HUD around the 3D ocean */
+
+        .ocean-hud {
+            position: absolute;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .ocean-hud.top-left {
+            top: 18px;
+            left: 18px;
+            padding: 10px 13px;
+            background: rgba(1, 10, 17, 0.72);
+            border: 1px solid rgba(100, 200, 225, 0.14);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hud-kicker {
+            color: #5bdcf8;
+            font-size: 0.60rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hud-title {
+            color: #e4faff;
+            font-size: 0.78rem;
+            font-weight: 700;
+            margin-top: 2px;
+        }
+
+        .hud-date {
+            color: #7896a4;
+            font-size: 0.65rem;
+            margin-top: 2px;
+        }
+
+        .ocean-legend {
+            position: absolute;
+            z-index: 10;
+            top: 18px;
+            right: 18px;
+            width: 155px;
+            padding: 12px;
+            background: rgba(1, 10, 17, 0.72);
+            border: 1px solid rgba(100, 200, 225, 0.14);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            pointer-events: none;
+        }
+
+        .legend-title {
+            color: #dff8ff;
+            font-size: 0.66rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .temperature-gradient {
+            height: 7px;
+            border-radius: 999px;
+            background: linear-gradient(
+                90deg,
+                #092f68 0%,
+                #0c78a6 25%,
+                #25bfd0 48%,
+                #f1d653 73%,
+                #f05f31 100%
+            );
+        }
+
+        .gradient-labels {
+            display: flex;
+            justify-content: space-between;
+            color: #718e9c;
+            font-size: 0.58rem;
+            margin-top: 4px;
+        }
+
+        .legend-row {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: #87a4b1;
+            font-size: 0.61rem;
+            margin-top: 9px;
+        }
+
+        .legend-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #ffffff;
+            box-shadow: 0 0 8px rgba(255,255,255,0.75);
+        }
+
+        .legend-line {
+            width: 15px;
+            height: 2px;
+            border-radius: 99px;
+            background: #bceeff;
+            box-shadow: 0 0 7px rgba(188,238,255,0.55);
+        }
+
+        .ocean-controls {
+            position: absolute;
+            z-index: 12;
+            right: 18px;
+            bottom: 18px;
+            display: flex;
+            gap: 7px;
+        }
+
+        .ocean-control-btn {
+            min-width: 38px;
+            height: 34px;
+            padding: 0 10px;
+            border: 1px solid rgba(110, 210, 235, 0.20);
+            border-radius: 9px;
+            background: rgba(1, 10, 17, 0.76);
+            color: #9eddec;
+            font-size: 0.66rem;
+            font-weight: 700;
+            backdrop-filter: blur(10px);
+        }
+
+        .ocean-control-btn:hover {
+            background: rgba(18, 86, 112, 0.72);
+            border-color: rgba(110, 210, 235, 0.42);
+        }
+
+        /* Compass inspired by scientific navigation displays */
+
+        .ocean-compass {
+            position: absolute;
+            z-index: 11;
+            right: 24px;
+            bottom: 65px;
+            width: 74px;
+            height: 74px;
+            border: 1px solid rgba(147, 220, 240, 0.20);
+            border-radius: 50%;
+            background: rgba(1, 10, 17, 0.56);
+            box-shadow:
+                inset 0 0 20px rgba(80, 180, 220, 0.06),
+                0 0 18px rgba(0,0,0,0.20);
+            backdrop-filter: blur(8px);
+            pointer-events: none;
+        }
+
+        .ocean-compass::before,
+        .ocean-compass::after {
+            content: "";
+            position: absolute;
+            background: rgba(140, 214, 233, 0.15);
+        }
+
+        .ocean-compass::before {
+            width: 1px;
+            height: 56px;
+            left: 36px;
+            top: 9px;
+        }
+
+        .ocean-compass::after {
+            height: 1px;
+            width: 56px;
+            left: 9px;
+            top: 36px;
+        }
+
+        .compass-center {
+            position: absolute;
+            left: 30px;
+            top: 30px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(75, 203, 236, 0.20);
+            border: 1px solid rgba(133, 230, 250, 0.65);
+            box-shadow: 0 0 12px rgba(84, 214, 244, 0.28);
+        }
+
+        .compass-n,
+        .compass-e,
+        .compass-s,
+        .compass-w {
+            position: absolute;
+            color: #b8e9f5;
+            font-size: 0.55rem;
+            font-weight: 800;
+        }
+
+        .compass-n { top: 5px; left: 32px; }
+        .compass-e { right: 6px; top: 31px; }
+        .compass-s { bottom: 5px; left: 32px; }
+        .compass-w { left: 6px; top: 31px; }
 
         .visual-overlay {
             position: absolute;
@@ -423,9 +625,10 @@
             color: #7895a3;
             font-size: 0.7rem;
             pointer-events: none;
+            z-index: 10;
         }
 
-        /* ================= LOCATION CARD ================= */
+/* ================= LOCATION CARD ================= */
 
         .location-card {
             min-height: 100%;
@@ -695,6 +898,36 @@
                 height: 500px;
             }
 
+            .ocean-legend {
+                width: 135px;
+                top: 12px;
+                right: 12px;
+            }
+
+            .ocean-hud.top-left {
+                top: 12px;
+                left: 12px;
+            }
+
+            .ocean-compass {
+                right: 15px;
+                bottom: 58px;
+                transform: scale(0.88);
+                transform-origin: bottom right;
+            }
+
+            .ocean-controls {
+                right: 12px;
+                bottom: 12px;
+            }
+
+            .visual-overlay {
+                left: 12px;
+                bottom: 12px;
+                max-width: 45%;
+                font-size: 0.62rem;
+            }
+
             .data-strip {
                 grid-template-columns: 1fr;
             }
@@ -892,7 +1125,7 @@
                         <h2>3D Ocean Temperature Model</h2>
 
                         <p>
-                            Spatial temperature distribution by depth
+                            Temperature volume, seafloor shape and flow visualization
                         </p>
 
                     </div>
@@ -907,6 +1140,42 @@
                 <div class="visual-container">
 
                     <div id="ocean3d"></div>
+
+                    <div class="ocean-hud top-left">
+                        <div class="hud-kicker">OCEANVISTA 3D</div>
+                        <div class="hud-title">Temperature Volume</div>
+                        <div class="hud-date" id="modelDate">Model date · 01 Oct 2026</div>
+                    </div>
+
+                    <div class="ocean-legend">
+                        <div class="legend-title">TEMPERATURE</div>
+                        <div class="temperature-gradient"></div>
+                        <div class="gradient-labels">
+                            <span>Cold</span>
+                            <span>Warm</span>
+                        </div>
+                        <div class="legend-row">
+                            <span class="legend-dot"></span>
+                            <span>Selected location</span>
+                        </div>
+                        <div class="legend-row">
+                            <span class="legend-line"></span>
+                            <span>Flow visualization</span>
+                        </div>
+                    </div>
+
+                    <div class="ocean-compass" aria-label="Navigation compass">
+                        <span class="compass-n">N</span>
+                        <span class="compass-e">E</span>
+                        <span class="compass-s">S</span>
+                        <span class="compass-w">W</span>
+                        <span class="compass-center"></span>
+                    </div>
+
+                    <div class="ocean-controls">
+                        <button class="ocean-control-btn" id="rotateBtn" onclick="toggleOceanRotation()">Pause</button>
+                        <button class="ocean-control-btn" onclick="resetOceanView()">Reset</button>
+                    </div>
 
                     <div class="visual-overlay">
                         Drag to rotate · Scroll to zoom · Hover for values
@@ -1027,7 +1296,7 @@
     </div>
 
 
-    <div class="info-card">
+    <div class="data-stat">
 
                 <small>
                     Variable
@@ -1040,7 +1309,7 @@
     </div>
 
 
-    <div class="info-card">
+    <div class="data-stat">
 
                 <small>
                     Dimensions
@@ -1145,6 +1414,15 @@
          */
 
         const API_BASE = "";
+
+        const searchInput =
+            document.getElementById("locationSearch");
+
+        let oceanRotationRunning = true;
+        let oceanRotationFrame = null;
+        let oceanRotationStart = 0;
+        let oceanRotationAngle = 0;
+        let currentOceanCamera = null;
 
 
         /* =====================================================
@@ -1483,7 +1761,7 @@ async function searchLocation() {
 
                 const gridResponse =
                     await fetch(
-                        `${API_BASE}/ocean-grid`
+                        `${API_BASE}/ocean-grid?latitude=${latitude}&longitude=${longitude}`
                     );
 
 
@@ -1620,517 +1898,799 @@ async function searchLocation() {
 
         function create3DVisualization(data) {
 
-    const latitudes =
-        data.latitude;
+            const latitudes = data.latitude;
+            const longitudes = data.longitude;
+            const depths = data.depth;
+            const values = data.temperature;
 
-            const longitudes =
-                data.longitude;
+            if (
+                !Array.isArray(latitudes) ||
+                !Array.isArray(longitudes) ||
+                !Array.isArray(depths) ||
+                !Array.isArray(values)
+            ) {
+                throw new Error("Invalid 3D ocean grid received.");
+            }
 
-            const depths =
-                data.depth;
+            const maxDepth =
+                Math.max(...depths.map(Number).filter(Number.isFinite), 1);
 
-            const values =
-                data.temperature;
+            const minLat = Math.min(...latitudes);
+            const maxLat = Math.max(...latitudes);
+            const minLon = Math.min(...longitudes);
+            const maxLon = Math.max(...longitudes);
 
+            const latRange = Math.max(maxLat - minLat, 0.0001);
+            const lonRange = Math.max(maxLon - minLon, 0.0001);
+
+            /* -----------------------------------------------------
+               Normalize the real geographic grid into a cinematic
+               3D block. The hover text still shows real coordinates.
+            ----------------------------------------------------- */
+
+            const xNorm = longitudes.map(
+                lon => ((lon - minLon) / lonRange) * 2 - 1
+            );
+
+            const yNorm = latitudes.map(
+                lat => ((lat - minLat) / latRange) * 2 - 1
+            );
+
+            const zScale = 1.55;
+
+            const zNorm = depth =>
+                -(Number(depth) / maxDepth) * zScale;
 
             const x = [];
             const y = [];
             const z = [];
-
             const temperatureValues = [];
+            const hoverText = [];
 
+            for (let i = 0; i < latitudes.length; i++) {
 
-            /* Convert dataset into Plotly points. */
+                for (let j = 0; j < longitudes.length; j++) {
 
-            for (
-                let i = 0;
-                i < latitudes.length;
-                i++
-            ) {
-
-                for (
-                    let j = 0;
-                    j < longitudes.length;
-                    j++
-                ) {
-
-                    for (
-                        let k = 0;
-                        k < depths.length;
-                        k++
-                    ) {
+                    for (let k = 0; k < depths.length; k++) {
 
                         const value =
-                            values[i][j][k];
-
+                            values?.[i]?.[j]?.[k];
 
                         if (
                             value === null ||
-                            value === undefined
+                            value === undefined ||
+                            !Number.isFinite(Number(value))
                         ) {
-
                             continue;
-
                         }
 
+                        x.push(xNorm[j]);
+                        y.push(yNorm[i]);
+                        z.push(zNorm(depths[k]));
+                        temperatureValues.push(Number(value));
 
-                        x.push(
-                            longitudes[j]
+                        hoverText.push(
+                            `Temperature: ${Number(value).toFixed(2)} °C<br>` +
+                            `Longitude: ${Number(longitudes[j]).toFixed(2)}°<br>` +
+                            `Latitude: ${Number(latitudes[i]).toFixed(2)}°<br>` +
+                            `Depth: ${Number(depths[k]).toFixed(2)} m`
                         );
-
-                        y.push(
-                            latitudes[i]
-                        );
-
-                        z.push(
-                            -depths[k]
-                        );
-
-                        temperatureValues.push(
-                            value
-                        );
-
                     }
-
                 }
-
             }
 
+            const temperatureScale = [
+                [0.00, "#082d63"],
+                [0.18, "#075b91"],
+                [0.38, "#0b9db8"],
+                [0.55, "#38cbd0"],
+                [0.72, "#f0d34f"],
+                [0.88, "#f59a3b"],
+                [1.00, "#ef4d2f"]
+            ];
 
-            /* =================================================
-               TEMPERATURE TRACE
-            ================================================== */
+            /* -----------------------------------------------------
+               1. Main 3D temperature volume.
+               Larger translucent points create a continuous
+               volumetric appearance while retaining real model data.
+            ----------------------------------------------------- */
 
-            const trace = {
+            const volumeTrace = {
 
-                x: x,
-
-                y: y,
-
-                z: z,
+                x,
+                y,
+                z,
 
                 mode: "markers",
+                type: "scatter3d",
+
+                marker: {
+                    size: 5.2,
+                    color: temperatureValues,
+                    colorscale: temperatureScale,
+                    cmin: Math.min(...temperatureValues),
+                    cmax: Math.max(...temperatureValues),
+                    opacity: 0.56,
+
+                    line: {
+                        width: 0
+                    },
+
+                    colorbar: {
+                        title: {
+                            text: "°C",
+                            font: {
+                                color: "#c4e8f2",
+                                size: 11
+                            }
+                        },
+                        tickfont: {
+                            color: "#8daab7",
+                            size: 9
+                        },
+                        thickness: 10,
+                        len: 0.58,
+                        x: 0.98
+                    }
+                },
+
+                text: hoverText,
+
+                hovertemplate:
+                    "%{text}<extra>OCEANVISTA MODEL</extra>"
+            };
+
+            /* -----------------------------------------------------
+               2. Thin temperature layers.
+               These make the surface-to-depth transition look like
+               a scientific ocean volume rather than loose points.
+            ----------------------------------------------------- */
+
+            const layerTraces = [];
+
+            const layerStep =
+                Math.max(1, Math.floor(depths.length / 5));
+
+            for (
+                let k = 0;
+                k < depths.length;
+                k += layerStep
+            ) {
+
+                const zLevel = zNorm(depths[k]);
+
+                const layerZ = latitudes.map(
+                    () => longitudes.map(
+                        () => zLevel
+                    )
+                );
+
+                const layerTemperature =
+                    latitudes.map((_, i) =>
+                        longitudes.map((_, j) => {
+                            const v =
+                                values?.[i]?.[j]?.[k];
+
+                            return (
+                                v === null ||
+                                v === undefined ||
+                                !Number.isFinite(Number(v))
+                            )
+                                ? null
+                                : Number(v);
+                        })
+                    );
+
+                layerTraces.push({
+
+                    type: "surface",
+
+                    x: xNorm,
+                    y: yNorm,
+                    z: layerZ,
+
+                    surfacecolor: layerTemperature,
+
+                    colorscale: temperatureScale,
+
+                    cmin: Math.min(...temperatureValues),
+                    cmax: Math.max(...temperatureValues),
+
+                    opacity:
+                        k === 0 ? 0.26 : 0.12,
+
+                    showscale: false,
+
+                    hovertemplate:
+                        `Depth: ${Number(depths[k]).toFixed(1)} m<br>` +
+                        "Temperature: %{surfacecolor:.2f} °C" +
+                        "<extra>Temperature layer</extra>",
+
+                    connectgaps: false
+                });
+            }
+
+            /* -----------------------------------------------------
+               3. Seafloor / bathymetry surface.
+               We derive the deepest valid model level at each grid
+               cell. This is based on the returned model mask, not
+               invented bathymetry data.
+            ----------------------------------------------------- */
+
+            const seabedZ = [];
+            const seabedDepth = [];
+
+            for (let i = 0; i < latitudes.length; i++) {
+
+                const rowZ = [];
+                const rowDepth = [];
+
+                for (let j = 0; j < longitudes.length; j++) {
+
+                    let deepestIndex = -1;
+
+                    for (
+                        let k = depths.length - 1;
+                        k >= 0;
+                        k--
+                    ) {
+
+                        const v =
+                            values?.[i]?.[j]?.[k];
+
+                        if (
+                            v !== null &&
+                            v !== undefined &&
+                            Number.isFinite(Number(v))
+                        ) {
+                            deepestIndex = k;
+                            break;
+                        }
+                    }
+
+                    if (deepestIndex === -1) {
+                        rowZ.push(null);
+                        rowDepth.push(null);
+                    } else {
+                        rowZ.push(
+                            zNorm(depths[deepestIndex]) - 0.015
+                        );
+                        rowDepth.push(
+                            Number(depths[deepestIndex])
+                        );
+                    }
+                }
+
+                seabedZ.push(rowZ);
+                seabedDepth.push(rowDepth);
+            }
+
+            const seabedTrace = {
+
+                type: "surface",
+
+                x: xNorm,
+                y: yNorm,
+                z: seabedZ,
+
+                surfacecolor: seabedDepth,
+
+                colorscale: [
+                    [0.00, "#164b61"],
+                    [0.25, "#10384b"],
+                    [0.55, "#092738"],
+                    [0.78, "#061824"],
+                    [1.00, "#020b12"]
+                ],
+
+                cmin: 0,
+                cmax: maxDepth,
+
+                opacity: 0.94,
+
+                showscale: false,
+
+                hovertemplate:
+                    "Model seabed depth: %{surfacecolor:.1f} m" +
+                    "<extra>Seafloor</extra>",
+
+                connectgaps: false
+            };
+
+            /* -----------------------------------------------------
+               4. Surface glow / ocean skin.
+            ----------------------------------------------------- */
+
+            const surfaceZ =
+                latitudes.map(() =>
+                    longitudes.map(() => 0.018)
+                );
+
+            const surfaceTemperature =
+                latitudes.map((_, i) =>
+                    longitudes.map((_, j) => {
+
+                        const v =
+                            values?.[i]?.[j]?.[0];
+
+                        return (
+                            v === null ||
+                            v === undefined ||
+                            !Number.isFinite(Number(v))
+                        )
+                            ? null
+                            : Number(v);
+                    })
+                );
+
+            const surfaceTrace = {
+
+                type: "surface",
+
+                x: xNorm,
+                y: yNorm,
+                z: surfaceZ,
+
+                surfacecolor: surfaceTemperature,
+
+                colorscale: temperatureScale,
+
+                cmin: Math.min(...temperatureValues),
+                cmax: Math.max(...temperatureValues),
+
+                opacity: 0.42,
+
+                showscale: false,
+
+                hovertemplate:
+                    "Surface temperature: %{surfacecolor:.2f} °C" +
+                    "<extra>Ocean surface</extra>",
+
+                connectgaps: false
+            };
+
+            /* -----------------------------------------------------
+               5. Flow lines.
+
+               Current velocity is not part of the current API, so
+               these are explicitly a visual flow layer rather than
+               claimed current observations.
+            ----------------------------------------------------- */
+
+            const flowTraces = [];
+
+            const flowCount = 5;
+
+            for (let lineIndex = 0; lineIndex < flowCount; lineIndex++) {
+
+                const flowX = [];
+                const flowY = [];
+                const flowZ = [];
+
+                const startY =
+                    -0.82 + lineIndex * 0.40;
+
+                for (let p = 0; p <= 24; p++) {
+
+                    const t = p / 24;
+                    const xx = -1.08 + t * 2.16;
+
+                    const yy =
+                        startY +
+                        0.12 * Math.sin(
+                            t * Math.PI * 2.0 +
+                            lineIndex * 0.8
+                        );
+
+                    flowX.push(xx);
+                    flowY.push(yy);
+                    flowZ.push(
+                        0.045 +
+                        0.035 * Math.sin(
+                            t * Math.PI +
+                            lineIndex
+                        )
+                    );
+                }
+
+                flowTraces.push({
+
+                    type: "scatter3d",
+
+                    x: flowX,
+                    y: flowY,
+                    z: flowZ,
+
+                    mode: "lines",
+
+                    line: {
+                        color: "#c9f5ff",
+                        width: 2.2
+                    },
+
+                    opacity: 0.46,
+
+                    hoverinfo: "skip",
+
+                    showlegend: false
+                });
+            }
+
+            /* -----------------------------------------------------
+               6. Selected location marker.
+            ----------------------------------------------------- */
+
+            const selectedLatitude =
+                Number(document.getElementById("latitude").value);
+
+            const selectedLongitude =
+                Number(document.getElementById("longitude").value);
+
+            const selectedX =
+                ((selectedLongitude - minLon) / lonRange) * 2 - 1;
+
+            const selectedY =
+                ((selectedLatitude - minLat) / latRange) * 2 - 1;
+
+            const selectedMarker = {
 
                 type: "scatter3d",
 
+                x: [selectedX],
+                y: [selectedY],
+                z: [0.08],
+
+                mode: "markers+text",
 
                 marker: {
-
-                    /* Slightly smaller points. */
-
-                    size: 3.2,
-
-                    color:
-                        temperatureValues,
-
-
-                    colorscale: [
-
-                        [0, "#123d70"],
-
-                        [0.25, "#1679a8"],
-
-                        [0.5, "#28b8c8"],
-
-                        [0.75, "#f0d75e"],
-
-                        [1, "#ef7135"]
-
-                    ],
-
-
-                    opacity: 0.82,
-
-
-                    colorbar: {
-
-                        title: {
-
-                            text:
-                                "Temperature °C",
-
-                            font: {
-                                color:
-                                    "#b8d9e4"
-                            }
-
-                        },
-
-                        tickfont: {
-                            color:
-                                "#8eacb8"
-                        }
-
+                    size: 8,
+                    color: "#ffffff",
+                    symbol: "diamond",
+                    line: {
+                        color: "#63e7ff",
+                        width: 3
                     }
-
                 },
 
+                text: ["Selected location"],
 
-                text:
+                textposition: "top center",
 
-                    temperatureValues.map(
-
-                        (value, index) =>
-
-                            `Temperature: ${Number(value).toFixed(2)} °C<br>
-                             Longitude: ${Number(x[index]).toFixed(2)}<br>
-                             Latitude: ${Number(y[index]).toFixed(2)}<br>
-                             Depth: ${Math.abs(Number(z[index])).toFixed(2)} m`
-
-                    ),
-
+                textfont: {
+                    color: "#dffaff",
+                    size: 10
+                },
 
                 hovertemplate:
-                    "%{text}<extra></extra>"
+                    `Selected location<br>` +
+                    `Latitude: ${selectedLatitude.toFixed(4)}°<br>` +
+                    `Longitude: ${selectedLongitude.toFixed(4)}°` +
+                    "<extra>OCEANVISTA</extra>",
 
+                showlegend: false
             };
 
+            /* Vertical guide from the selected point into the water. */
 
-            /* =================================================
-               INITIAL CAMERA
-               
-               Pulled farther away so the model stays
-               comfortably inside the visualization frame.
-            ================================================== */
+            const selectedGuide = {
+
+                type: "scatter3d",
+
+                x: [selectedX, selectedX],
+                y: [selectedY, selectedY],
+                z: [0.06, -1.40],
+
+                mode: "lines",
+
+                line: {
+                    color: "rgba(210,245,255,0.28)",
+                    width: 2,
+                    dash: "dot"
+                },
+
+                hoverinfo: "skip",
+
+                showlegend: false
+            };
 
             const initialCamera = {
 
                 eye: {
-
-                    x: 1.9,
-
-                    y: 1.9,
-
+                    x: 1.95,
+                    y: 1.85,
                     z: 1.35
-
                 },
 
                 center: {
-
                     x: 0,
-
                     y: 0,
-
-                    z: 0
-
+                    z: -0.18
                 },
 
                 up: {
-
                     x: 0,
-
                     y: 0,
-
                     z: 1
-
                 }
-
             };
 
+            currentOceanCamera =
+                JSON.parse(JSON.stringify(initialCamera));
 
-            /* =================================================
-               PLOTLY LAYOUT
-            ================================================== */
+            const layout = {
 
-    const layout = {
+                paper_bgcolor: "rgba(0,0,0,0)",
 
-                paper_bgcolor:
-                    "#06141f",
-
-                plot_bgcolor:
-                    "#06141f",
+                plot_bgcolor: "rgba(0,0,0,0)",
 
                 font: {
-                    color:
-                        "#8faebb"
+                    color: "#8faebb"
                 },
 
+                showlegend: false,
+
+                hoverlabel: {
+                    bgcolor: "#071d2a",
+                    bordercolor: "#3bc6e8",
+                    font: {
+                        color: "#e7fbff",
+                        size: 12
+                    }
+                },
 
                 scene: {
 
-                    bgcolor:
-                        "#06141f",
+                    bgcolor: "rgba(0,0,0,0)",
 
-
-                    /* Keeps the 3D model balanced. */
-
-                    aspectmode:
-                        "cube",
-
+                    aspectmode: "manual",
 
                     aspectratio: {
-
-                        x: 0.82,
-
-                        y: 0.82,
-
-                        z: 0.82
-
+                        x: 1.30,
+                        y: 1.00,
+                        z: 0.90
                     },
 
+                    camera: initialCamera,
 
-            xaxis: {
+                    dragmode: "orbit",
 
-                        title: {
-
-                            text:
-                                "Longitude",
-
-                            font: {
-                                color:
-                                    "#7e9ba8"
-                            }
-
-                        },
-
-                        tickfont: {
-                            color:
-                                "#607d89"
-                        },
-
-                        gridcolor:
-                            "rgba(82,145,165,0.12)"
-
+                    xaxis: {
+                        visible: false,
+                        showgrid: false,
+                        zeroline: false,
+                        showbackground: false
                     },
 
-
-            yaxis: {
-
-                        title: {
-
-                            text:
-                                "Latitude",
-
-                            font: {
-                                color:
-                                    "#7e9ba8"
-                            }
-
-                        },
-
-                        tickfont: {
-                            color:
-                                "#607d89"
-                        },
-
-                        gridcolor:
-                            "rgba(82,145,165,0.12)"
-
+                    yaxis: {
+                        visible: false,
+                        showgrid: false,
+                        zeroline: false,
+                        showbackground: false
                     },
 
-
-            zaxis: {
-
-                        title: {
-
-                            text:
-                                "Depth (m)",
-
-                            font: {
-                                color:
-                                    "#7e9ba8"
-                            }
-
-                        },
-
-                        tickfont: {
-                            color:
-                                "#607d89"
-                        },
-
-                        gridcolor:
-                            "rgba(82,145,165,0.12)"
-
-                    },
-
-
-                    camera:
-                        initialCamera
-
+                    zaxis: {
+                        visible: false,
+                        showgrid: false,
+                        zeroline: false,
+                        showbackground: false
+                    }
                 },
 
-
                 margin: {
-
                     l: 0,
-
                     r: 0,
-
                     b: 0,
-
-                    t: 10
-
+                    t: 0
                 }
-
             };
 
+            const allTraces = [
+                ...layerTraces,
+                seabedTrace,
+                surfaceTrace,
+                volumeTrace,
+                ...flowTraces,
+                selectedGuide,
+                selectedMarker
+            ];
 
-            /* =================================================
-               CREATE PLOT
-            ================================================== */
-
-            Plotly.newPlot(
-
+            Plotly.react(
                 "ocean3d",
-
-                [trace],
-
+                allTraces,
                 layout,
-
                 {
-
-                    responsive:
-                        true,
-
-                    displaylogo:
-                        false,
-
+                    responsive: true,
+                    displaylogo: false,
+                    scrollZoom: true,
+                    displayModeBar: true,
                     modeBarButtonsToRemove: [
-
                         "lasso2d",
-
-                        "select2d"
-
+                        "select2d",
+                        "toImage"
                     ]
-
                 }
-
             ).then(function () {
 
+                oceanRotationAngle = 0;
+                oceanRotationStart = performance.now();
 
-                /* =============================================
-                   ACTUAL EARTH ROTATION SPEED
+                startOceanRotation();
 
-                   Sidereal rotation period:
+                const plot =
+                    document.getElementById("ocean3d");
 
-                   23 hours
-                   56 minutes
-                   4 seconds
+                plot.on(
+                    "plotly_relayout",
+                    function(eventData) {
 
-                   = 86,164 seconds
-
-                   One complete 360° rotation therefore
-                   takes 86,164 seconds.
-                ============================================== */
-
-                const EARTH_ROTATION_PERIOD =
-                    86164;
-
-
-                const TWO_PI =
-                    Math.PI * 2;
-
-
-                const startTime =
-                    performance.now();
-
-
-                function rotateOceanModel(
-                    currentTime
-                ) {
-
-                    const elapsedSeconds =
-
-                        (
-                            currentTime -
-                            startTime
-                        ) / 1000;
-
-
-                    /* Calculate rotation angle. */
-
-                    const rotation =
-
-                        (
-                            elapsedSeconds %
-                            EARTH_ROTATION_PERIOD
-                        ) /
-
-                        EARTH_ROTATION_PERIOD *
-
-                        TWO_PI;
-
-
-                    /*
-                     * Camera radius.
-                     *
-                     * Larger value = model appears
-                     * smaller and stays inside frame.
-                     */
-
-                    const radius =
-                        2.65;
-
-
-                    const camera = {
-
-                        eye: {
-
-                            x:
-                                radius *
-                                Math.cos(rotation),
-
-                            y:
-                                radius *
-                                Math.sin(rotation),
-
-                            z:
-                                1.35
-
-                        },
-
-
-                        center: {
-
-                            x: 0,
-
-                            y: 0,
-
-                            z: 0
-
-                        },
-
-
-                        up: {
-
-                            x: 0,
-
-                            y: 0,
-
-                            z: 1
-
+                        if (
+                            eventData &&
+                            eventData["scene.camera"] &&
+                            !oceanRotationRunning
+                        ) {
+                            currentOceanCamera =
+                                eventData["scene.camera"];
                         }
-
-                    };
-
-
-                    Plotly.relayout(
-
-                        "ocean3d",
-
-                        {
-
-                            "scene.camera":
-                                camera
-
-                        }
-
-                    );
+                    }
+                );
+            });
+        }
 
 
-                    requestAnimationFrame(
-                        rotateOceanModel
-                    );
+        function startOceanRotation() {
 
+            if (oceanRotationFrame) {
+                cancelAnimationFrame(oceanRotationFrame);
+            }
+
+            oceanRotationRunning = true;
+
+            const button =
+                document.getElementById("rotateBtn");
+
+            if (button) {
+                button.textContent = "Pause";
+            }
+
+            const rotationPeriod =
+                48;
+
+            const start =
+                performance.now();
+
+            function animate(currentTime) {
+
+                if (!oceanRotationRunning) {
+                    return;
                 }
 
+                const elapsed =
+                    (currentTime - start) / 1000;
 
-                requestAnimationFrame(
-                    rotateOceanModel
+                const angle =
+                    oceanRotationAngle +
+                    (elapsed / rotationPeriod) *
+                    Math.PI * 2;
+
+                const radius = 2.55;
+
+                const camera = {
+
+                    eye: {
+                        x: radius * Math.cos(angle),
+                        y: radius * Math.sin(angle),
+                        z: 1.38
+                    },
+
+                    center: {
+                        x: 0,
+                        y: 0,
+                        z: -0.18
+                    },
+
+                    up: {
+                        x: 0,
+                        y: 0,
+                        z: 1
+                    }
+                };
+
+                currentOceanCamera = camera;
+
+                Plotly.relayout(
+                    "ocean3d",
+                    {
+                        "scene.camera": camera
+                    }
                 );
 
-            });
+                oceanRotationFrame =
+                    requestAnimationFrame(animate);
+            }
 
+            oceanRotationFrame =
+                requestAnimationFrame(animate);
+        }
+
+
+        function toggleOceanRotation() {
+
+            const button =
+                document.getElementById("rotateBtn");
+
+            if (oceanRotationRunning) {
+
+                oceanRotationRunning = false;
+
+                if (oceanRotationFrame) {
+                    cancelAnimationFrame(oceanRotationFrame);
+                }
+
+                if (button) {
+                    button.textContent = "Play";
+                }
+
+            } else {
+
+                oceanRotationAngle = 0;
+
+                startOceanRotation();
+
+            }
+        }
+
+
+        function resetOceanView() {
+
+            const plot =
+                document.getElementById("ocean3d");
+
+            if (!plot) {
+                return;
+            }
+
+            const camera = {
+
+                eye: {
+                    x: 1.95,
+                    y: 1.85,
+                    z: 1.35
+                },
+
+                center: {
+                    x: 0,
+                    y: 0,
+                    z: -0.18
+                },
+
+                up: {
+                    x: 0,
+                    y: 0,
+                    z: 1
+                }
+            };
+
+            oceanRotationRunning = false;
+
+            if (oceanRotationFrame) {
+                cancelAnimationFrame(oceanRotationFrame);
+            }
+
+            currentOceanCamera = camera;
+
+            Plotly.relayout(
+                "ocean3d",
+                {
+                    "scene.camera": camera
+                }
+            );
+
+            const button =
+                document.getElementById("rotateBtn");
+
+            if (button) {
+                button.textContent = "Play";
+            }
         }
 
 
